@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom"
 import { useState } from "react"
 
 import AnimeCard from "../components/AnimeCard"
+import Loading from "../components/Loading"
 
 export default function Anime() {
     const [isLoading, setIsLoading] = useState(true)
@@ -29,9 +30,22 @@ export default function Anime() {
     return (
         <div className="flex flex-row flex-wrap justify-center">
             {isLoading ? (
-                <p>Loading...</p>
+                <Loading />
             ) : (
-                animes.map((anime) => (
+                animes.map((anime: {
+                    status: string
+                    images: {
+                        jpg: {
+                            image_url: string
+                        }
+                    }
+                    mal_id: number
+                    rank: number
+                    score: number
+                    scored_by: number
+                    title: string
+                    title_japanese: string
+                }) => (
                     <AnimeCard
                         anime={{
                             airingStatus: anime.status,
