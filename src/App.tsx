@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage"
 
 import AppLayout from "./AppLayout"
 import Anime from "./pages/Anime"
+import Details from "./pages/Details"
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/anime",
         element: <Anime />
+      },
+      {
+        path: "/anime/details",
+        element: <Details />
       }
     ]
   }
