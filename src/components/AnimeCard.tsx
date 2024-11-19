@@ -30,10 +30,14 @@ export default function AnimeCard({ anime }: { anime: Anime }) {
                   <p className="text-xs text-gray-500 dark:text-gray-400">{anime.scoredBy} users</p>
               </div>
           </div>
-          <div className="border border-gray-400 rounded-full w-fit my-2 px-2">
+          <div className={`border border-gray-400 rounded-full w-fit my-2 px-2 
+                  ${anime.airingStatus === "Finished Airing" ? "bg-green-300 dark:bg-green-500" : 
+                    anime.airingStatus === "Paused" ? "bg-yellow-300 dark:bg-yellow-500" : 
+                    anime.airingStatus === "Not yet aired" ? "bg-red-300 dark:bg-red-500" : "bg-blue-300 dark:bg-blue-500"}`
+                  }>
               <p className="text-center text-sm">{anime.airingStatus}</p>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Mal ID: {anime.malId}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">MAL ID: {anime.malId}</p>
         </div>
       </div>
     </Link>
