@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Anime from "../types/Anime";
+import { Anime } from "../types/Anime";
 import { FaStar } from "react-icons/fa";
 
 export default function AnimeCard({ anime }: { anime: Anime }) {

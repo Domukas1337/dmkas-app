@@ -9,4 +9,13 @@ interface Anime {
     titleJapanese: string;
   }
 
-export default Anime
+interface AnimeDetails extends Anime {
+    description: string;
+    genres: string[];
+    episodes: number;
+    status: string;
+    type: string;
+    url: string;
+  }
+
+export type { Anime, AnimeDetails }
