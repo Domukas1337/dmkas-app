@@ -27,6 +27,8 @@ export default function Anime() {
         fetchAnime()
     }, [anime])
 
+    console.log(animes)
+
     return (
         <div className="flex flex-row flex-wrap justify-center">
             {isLoading ? (
@@ -49,7 +51,7 @@ export default function Anime() {
                     <AnimeCard
                         anime={{
                             airingStatus: anime.status,
-                            image: anime.images.jpg.image_url,
+                            images: anime.images,
                             malId: anime.mal_id,
                             rank: anime.rank,
                             score: anime.score,

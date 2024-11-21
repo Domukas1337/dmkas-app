@@ -1,21 +1,22 @@
 interface Anime {
     airingStatus: string;
-    image: string;
+    images: {
+      jpg: {
+          image_url: string
+      }
+    }
     malId: number;
     rank: number;
     score: number;
     scoredBy: number;
     title: string;
     titleJapanese: string;
+    synopsis?: string;
+    genres?: string[];
+    episodes?: number;
+    status?: string;
+    type?: string;
+    url?: string;
   }
 
-interface AnimeDetails extends Anime {
-    description: string;
-    genres: string[];
-    episodes: number;
-    status: string;
-    type: string;
-    url: string;
-  }
-
-export type { Anime, AnimeDetails }
+export default Anime
