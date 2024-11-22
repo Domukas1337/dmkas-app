@@ -15,7 +15,7 @@ export default function AnimeCard({ anime }: { anime: Anime }) {
               {anime.title.length <= 20 && (
                   <h2 className="text-lg font-semibold">{anime.title}</h2>
               )}
-              <p className="text-sm text-gray-500 dark:text-gray-400">{anime.titleJapanese}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{anime.title_japanese}</p>
           </div>
           <div className="flex flex-row gap-2">
               <div>
@@ -27,15 +27,15 @@ export default function AnimeCard({ anime }: { anime: Anime }) {
                   <h2 className="text-sm">{anime.score}</h2>
                   <FaStar className="text-yellow-400 text-lg pl-1"/>
                 </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{anime.scoredBy} users</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{anime.scored_by} users</p>
               </div>
           </div>
           <div className={`border border-gray-400 rounded-full w-fit my-2 px-2 
-                  ${anime.airingStatus === "Finished Airing" ? "bg-green-300 dark:bg-green-500" : 
-                    anime.airingStatus === "Paused" ? "bg-yellow-300 dark:bg-yellow-500" : 
-                    anime.airingStatus === "Not yet aired" ? "bg-red-300 dark:bg-red-500" : "bg-blue-300 dark:bg-blue-500"}`
+                  ${anime.status === "Finished Airing" ? "bg-green-300 dark:bg-green-500" : 
+                    anime.status === "Paused" ? "bg-yellow-300 dark:bg-yellow-500" : 
+                    anime.status === "Not yet aired" ? "bg-red-300 dark:bg-red-500" : "bg-blue-300 dark:bg-blue-500"}`
                   }>
-              <p className="text-center text-sm">{anime.airingStatus}</p>
+              <p className="text-center text-sm">{anime.status}</p>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">MAL ID: {anime.malId}</p>
         </div>

@@ -37,14 +37,14 @@ export default function Details() {
                 animeDetails && (
                     <AnimeDetails
                         anime={{
-                            airingStatus: animeDetails.data.airingStatus,
+                            status: animeDetails.data.status,
                             images: animeDetails.data.images,
                             malId: animeDetails.data.malId,
                             rank: animeDetails.data.rank,
                             score: animeDetails.data.score,
-                            scoredBy: animeDetails.data.scoredBy,
+                            scored_by: animeDetails.data.scored_by,
                             title: animeDetails.data.title,
-                            titleJapanese: animeDetails.data.titleJapanese,
+                            title_japanese: animeDetails.data.title_japanese,
                             synopsis: animeDetails.data.synopsis,
                             genres: animeDetails.data.genres,
                             episodes: animeDetails.data.episodes,

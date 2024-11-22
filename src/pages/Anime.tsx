@@ -50,14 +50,14 @@ export default function Anime() {
                 }) => (
                     <AnimeCard
                         anime={{
-                            airingStatus: anime.status,
+                            status: anime.status,
                             images: anime.images,
                             malId: anime.mal_id,
                             rank: anime.rank,
                             score: anime.score,
-                            scoredBy: anime.scored_by,
+                            scored_by: anime.scored_by,
                             title: anime.title,
-                            titleJapanese: anime.title_japanese,
+                            title_japanese: anime.title_japanese,
                         }}
                     />
                 ))

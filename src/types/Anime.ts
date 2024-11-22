@@ -1,5 +1,5 @@
 interface Anime {
-    airingStatus: string;
+    status: string;
     images: {
       jpg: {
           image_url: string
@@ -8,13 +8,12 @@ interface Anime {
     malId: number;
     rank: number;
     score: number;
-    scoredBy: number;
+    scored_by: number;
     title: string;
-    titleJapanese: string;
+    title_japanese: string;
     synopsis?: string;
     genres?: string[];
     episodes?: number;
-    status?: string;
     type?: string;
     url?: string;
   }
