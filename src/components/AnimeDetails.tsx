@@ -12,7 +12,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
             <p>{anime.title}</p>
             <p>{anime.titleJapanese}</p>
             <p>{anime.synopsis}</p>
-            {anime.genres && <p>{anime.genres.join(', ')}</p>}
+            {anime.genres && <p>{anime.genres.map((genre: any) => genre.name).join(', ')}</p>}
             <p>{anime.episodes}</p>
             <p>{anime.status}</p>
             <p>{anime.type}</p>
