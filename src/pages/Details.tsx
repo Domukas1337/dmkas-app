@@ -30,7 +30,7 @@ export default function Details() {
     console.log(animeDetails)
 
     return (
-        <div className="flex flex-row flex-wrap justify-center">
+        <div className="w-screen px-16">
             {isLoading ? (
                 <Loading />
             ) : (
