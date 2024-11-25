@@ -39,7 +39,7 @@ export default function Details() {
                         anime={{
                             status: animeDetails.data.status,
                             images: animeDetails.data.images,
-                            malId: animeDetails.data.malId,
+                            mal_id: animeDetails.data.mal_id,
                             rank: animeDetails.data.rank,
                             score: animeDetails.data.score,
                             scored_by: animeDetails.data.scored_by,
@@ -48,8 +48,6 @@ export default function Details() {
                             synopsis: animeDetails.data.synopsis,
                             genres: animeDetails.data.genres,
                             episodes: animeDetails.data.episodes,
-                            type: animeDetails.data.type,
-                            url: animeDetails.data.url,
                         }}
                     />
                 )

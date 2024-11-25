@@ -5,7 +5,7 @@ interface Anime {
           image_url: string
       }
     }
-    malId: number;
+    mal_id: number;
     rank: number;
     score: number;
     scored_by: number;
@@ -14,8 +14,6 @@ interface Anime {
     synopsis?: string;
     genres?: string[];
     episodes?: number;
-    type?: string;
-    url?: string;
   }
 
 export default Anime

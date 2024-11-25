@@ -52,7 +52,7 @@ export default function Anime() {
                         anime={{
                             status: anime.status,
                             images: anime.images,
-                            malId: anime.mal_id,
+                            mal_id: anime.mal_id,
                             rank: anime.rank,
                             score: anime.score,
                             scored_by: anime.scored_by,

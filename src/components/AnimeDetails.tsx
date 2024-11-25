@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Anime from "../types/Anime";
 import { FaStar } from "react-icons/fa";
 
@@ -9,7 +10,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
                 <div className="flex flex-col gap-2 m-2 w-full">
                     <div className="flex flex-row w-full justify-between">
                         <p className="text-3xl font-semibold">{anime.title}</p>
-                        <div className={`border border-gray-400 justify-end rounded-full w-fit my-2 px-4 
+                        <div className={`border justify-end rounded-full w-fit my-2 px-4 
                             ${anime.status === "Finished Airing" ? "bg-green-300 dark:bg-green-500" : 
                                 anime.status === "Paused" ? "bg-yellow-300 dark:bg-yellow-500" : 
                                 anime.status === "Not yet aired" ? "bg-red-300 dark:bg-red-500" : "bg-blue-300 dark:bg-blue-500"}`
@@ -20,7 +21,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
                     <p className="text-xl text-gray-400">{anime.title_japanese}</p>
                     <div className="flex flex-row gap-2">
                         {anime.genres && anime.genres.map((genre: any, index: number) => (
-                            <p key={index} className="dark:bg-white px-2 text-xl font-semibold rounded-full dark:text-black">{genre.name}</p>
+                            <p key={index} className="dark:bg-white px-2 text-base font-semibold rounded-full dark:text-black">{genre.name}</p>
                         ))
                         }
                     </div>
@@ -39,11 +40,9 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
                     </div>
                     <p className="text-xl text-gray-500 dark:text-gray-400">{anime.episodes} {anime.episodes === 1 ? "episode" : "episodes"}</p>
                     <p>{anime.synopsis}</p>
+                    <p className="text-white">MyAnimeList ID: {anime.mal_id}</p>
                 </div>
             </div>
-            <p>{anime.malId}</p>
-            <p>{anime.type}</p>
-            <p>{anime.url}</p>
         </div>
     )
 }
