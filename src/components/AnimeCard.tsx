@@ -6,7 +6,7 @@ export default function AnimeCard({ anime }: { anime: Anime }) {
   return (
     <Link to={`/anime/details?id=${anime.mal_id}`} className="hover:scale-105 transition-all duration-200">
       <div className="flex flex-row border border-gray-400 rounded-lg shadow-lg w-96 h-48 p-2 m-2 dark:text-white">
-        <img src={anime.images.jpg.image_url} alt={anime.title} width={120} height={180} className="rounded-lg mr-2"/>
+        <img src={anime.images.jpg.image_url} alt={anime.title} width={120} height={180} className="rounded-lg mr-2 object-cover"/>
         <div className="flex flex-col">
           <div className="">
               {anime.title.length > 20 && (
