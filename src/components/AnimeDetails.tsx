@@ -9,7 +9,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
                 <div className="flex flex-col gap-2 m-2 w-full">
                     <div className="flex flex-row w-full justify-between">
                         <p className="text-3xl font-semibold">{anime.title}</p>
-                        <div className={`border justify-end rounded-full my-2 px-4 
+                        <div className={`border justify-end rounded-full my-2 px-4
                             ${anime.status === "Finished Airing" ? "bg-green-300 dark:bg-green-500" : 
                                 anime.status === "Paused" ? "bg-yellow-300 dark:bg-yellow-500" : 
                                 anime.status === "Not yet aired" ? "bg-red-300 dark:bg-red-500" : "bg-blue-300 dark:bg-blue-500"}`
