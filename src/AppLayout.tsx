@@ -3,7 +3,7 @@ import Navbar from "./ui/Navbar"
 
 export default function AppLayout() {
     return (
-        <div className="flex flex-col w-screen h-screen">
+        <div className="flex flex-col min-h-screen">
             <Navbar />
             <div className="flex flex-col flex-grow justify-center items-center">
                 <Outlet />

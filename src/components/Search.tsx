@@ -9,12 +9,12 @@ export default function Search() {
     }
 
     return (
-        <div className="mx-auto dark:text-white">
+        <div className="dark:text-white">
             <div className={`flex flex-row justify-center items-center border ${searchValue ? "bg-green-300 dark:bg-green-700" : "bg-black"} border-gray-400 rounded-full transition-all duration-200`}>
                 <input 
                     type="text" 
                     placeholder="Search..." 
-                    className="px-4 py-2 sm:w-96 w-64 rounded-full z-10 outline-none shadow-md dark:bg-black dark:text-white"
+                    className="px-4 py-2 sm:w-96 w-48 rounded-full z-10 outline-none shadow-md dark:bg-black dark:text-white"
                     value={searchValue}
                     onChange={handleInputChange}
                     onKeyDown={(event) => {

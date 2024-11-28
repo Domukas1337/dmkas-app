@@ -30,7 +30,7 @@ export default function Details() {
     console.log(animeDetails)
 
     return (
-        <div className="w-screen px-16">
+        <div className="w-screen p-2">
             {isLoading ? (
                 <Loading />
             ) : (
