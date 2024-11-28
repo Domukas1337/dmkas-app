@@ -37,7 +37,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
                         }>
                         <p className="text-center text-lg font-semibold">{anime.status}</p>
                 </div>
-                <p className="text-white">{anime.synopsis}</p>
+                <p className="text-white pr-4">{anime.synopsis}</p>
                 <p className="text-white">MyAnimeList ID: {anime.mal_id}</p>
             </div>
         </div>
