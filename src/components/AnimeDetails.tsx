@@ -5,7 +5,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
     return (
         <div className="text-white border-2 border-gray-400 rounded-lg mx-2">
             <div className="flex">
-                <img src={anime.images.jpg.large_image_url} alt={anime.title} className="rounded-lg m-2 border-2 border-gray-400 " />
+                <img src={anime.images.jpg.large_image_url} alt={anime.title} className="rounded-lg m-2 border-2 object-cover border-gray-400 " />
                 <div className="flex flex-col gap-2 m-2 w-full">
                     <div className="flex flex-row w-full justify-between">
                         <p className="text-3xl font-semibold">{anime.title}</p>
