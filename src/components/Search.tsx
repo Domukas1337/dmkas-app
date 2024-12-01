@@ -1,8 +1,13 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 export default function Search() {
     const [searchValue, setSearchValue] = useState("")
+
+    const [searchParams] = useSearchParams()
+
+    const q = searchParams.get('q')
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target.value)
@@ -15,7 +20,7 @@ export default function Search() {
                     type="text" 
                     placeholder="Search..." 
                     className="px-4 py-2 sm:w-96 w-48 rounded-full z-10 outline-none shadow-md dark:bg-slate-800 dark:text-white"
-                    value={searchValue}
+                    value={q ?? searchValue}
                     onChange={handleInputChange}
                     onKeyDown={(event) => {
                         if (event.key === "Enter" && searchValue) {

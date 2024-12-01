@@ -33,7 +33,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
                     </div>
                 </div>
                 <p className="text-xl text-gray-500 dark:text-gray-200">{anime.episodes} {anime.episodes === 1 ? "episode" : "episodes"}</p>
-                <div className={`border justify-end rounded-md px-2 py-1 w-48
+                <div className={`border justify-end rounded-md px-2 py-1 w-48 text-white
                         ${anime.status === "Finished Airing" ? "bg-green-300 dark:bg-green-500" : 
                             anime.status === "Paused" ? "bg-yellow-300 dark:bg-yellow-500" : 
                             anime.status === "Not yet aired" ? "bg-red-300 dark:bg-red-500" : "bg-blue-300 dark:bg-blue-500"}`
