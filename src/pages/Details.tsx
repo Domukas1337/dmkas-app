@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom"
 
 import Anime from "../types/Anime"
 import AnimeDetails from "../components/AnimeDetails"
-import Loading from "../components/Loading"
+import Loading from "../ui/Loading"
 
 export default function Details() {
     const [isLoading, setIsLoading] = useState(true)
@@ -30,7 +30,7 @@ export default function Details() {
     console.log(animeDetails)
 
     return (
-        <div className="w-screen p-2">
+        <div className="w-screen p-2 fadein">
             {isLoading ? (
                 <Loading />
             ) : (
