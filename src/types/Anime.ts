@@ -15,6 +15,9 @@ interface Anime {
     synopsis?: string;
     genres?: string[];
     episodes?: number;
+    trailer?: {
+      youtube_id?: string
+    }
   }
 
 export default Anime

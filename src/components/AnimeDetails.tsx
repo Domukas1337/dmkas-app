@@ -1,5 +1,8 @@
 import Anime from "../types/Anime";
 import { FaStar } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function AnimeDetails({ anime }: { anime: Anime }) {
     return (
@@ -38,6 +41,10 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
                         <p className="text-center text-lg font-semibold">{anime.status}</p>
                 </div>
                 <p className="text-white pr-4">{anime.synopsis}</p>
+                <div className="flex gap-2">
+                    <Link to={"https://www.youtube.com/watch?v=" + anime.trailer?.youtube_id} target="_blank" className="w-8 p-2 rounded-lg bg-white"><FaYoutube /></Link>
+                    <Link to={"https://x.com/search?q=" + anime.title} target="_blank" className="w-8 p-2 rounded-lg bg-white"><FaSquareXTwitter /></Link>
+                </div>
                 <p className="text-white">MyAnimeList ID: {anime.mal_id}</p>
             </div>
         </div>

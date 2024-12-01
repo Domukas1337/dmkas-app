@@ -48,6 +48,7 @@ export default function Details() {
                             synopsis: animeDetails.data.synopsis,
                             genres: animeDetails.data.genres,
                             episodes: animeDetails.data.episodes,
+                            trailer: animeDetails.data.trailer
                         }}
                     />
                 )
