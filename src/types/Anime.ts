@@ -18,6 +18,6 @@ interface Anime {
     trailer?: {
       youtube_id?: string
     }
-  }
+}
 
 export default Anime
