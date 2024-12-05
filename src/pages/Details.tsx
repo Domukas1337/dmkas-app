@@ -6,11 +6,12 @@ import AnimeReviews from "../types/AnimeReviews"
 
 import AnimeDetails from "../components/AnimeDetails"
 import Loading from "../ui/Loading"
+import Review from "../components/Review"
 
 export default function Details() {
     const [isLoading, setIsLoading] = useState(true)
     const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(null)
-    const [reviews, setReviews] = useState<{ reviews: AnimeReviews } | null>(null)
+    const [reviews, setReviews] = useState([])
     
     const [searchParams] = useSearchParams()
     
@@ -30,7 +31,7 @@ export default function Details() {
             const dataReviews = await responseReviews.json()
             console.log(dataReviews.data)
 
-            setReviews(dataReviews)
+            setReviews(dataReviews.data)
 
             setIsLoading(false)
         }
@@ -66,6 +67,12 @@ export default function Details() {
                     />
                 )
             )}
+            <div className="flex flex-col p-2">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">Reviews</h1>
+                {reviews && reviews.map((review: AnimeReviews, index: number) => (
+                    <Review key={index} review={review} />
+                ))}
+            </div>
         </div>
     );
 }

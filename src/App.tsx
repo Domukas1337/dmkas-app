@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound"
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
-    errorElement: <div className="text-red-500">Something went wrong.</div>,
+    // errorElement: <div className="text-red-500">Something went wrong.</div>,
     children: [
       {
         path: "/",
