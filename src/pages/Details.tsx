@@ -2,35 +2,48 @@ import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
 import Anime from "../types/Anime"
+import AnimeReviews from "../types/AnimeReviews"
+
 import AnimeDetails from "../components/AnimeDetails"
 import Loading from "../ui/Loading"
 
 export default function Details() {
     const [isLoading, setIsLoading] = useState(true)
     const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(null)
+    const [reviews, setReviews] = useState<{ reviews: AnimeReviews } | null>(null)
     
     const [searchParams] = useSearchParams()
     
     const id = searchParams.get('id')
+    console.log(id)
     
     useEffect(() => {
-        async function fetchAnime() {
+        async function fetchAnimeAndReviews() {
             setIsLoading(true)
-            const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`)
-            const data = await response.json()
-            console.log(data.data)
+            const responseDetails = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`)
+            const dataDetails = await responseDetails.json()
+            console.log(dataDetails.data)
 
-            setAnimeDetails(data)
+            setAnimeDetails(dataDetails)
+
+            const responseReviews = await fetch(`https://api.jikan.moe/v4/anime/${id}/reviews`)
+            const dataReviews = await responseReviews.json()
+            console.log(dataReviews.data)
+
+            setReviews(dataReviews)
+
             setIsLoading(false)
         }
 
-        fetchAnime()
+        fetchAnimeAndReviews()
     }, [id])
 
+    
     console.log(animeDetails)
+    console.log(reviews)
 
     return (
-        <div className="w-screen p-2 fadein">
+        <div className="m-2 sm:m-4 md:m-6 fadein border-2 border-gray-400 rounded-lg">
             {isLoading ? (
                 <Loading />
             ) : (

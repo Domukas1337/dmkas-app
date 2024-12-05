@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function AnimeDetails({ anime }: { anime: Anime }) {
     return (
-        <div className="flex flex-col lg:flex-row border-2 border-gray-400 rounded-lg">
+        <div className="flex flex-col lg:flex-row">
             <img src={anime.images.jpg.large_image_url} alt={anime.title} className="rounded-lg m-2 border-2 object-fit border-gray-400 " />
             <div className="flex flex-col gap-2 m-2 w-full">
                 <div className="flex flex-row w-full justify-between">
