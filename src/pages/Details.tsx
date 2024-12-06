@@ -49,30 +49,32 @@ export default function Details() {
                 <Loading />
             ) : (
                 animeDetails && (
-                    <AnimeDetails
-                        anime={{
-                            status: animeDetails.data.status,
-                            images: animeDetails.data.images,
-                            mal_id: animeDetails.data.mal_id,
-                            rank: animeDetails.data.rank,
-                            score: animeDetails.data.score,
-                            scored_by: animeDetails.data.scored_by,
-                            title: animeDetails.data.title,
-                            title_japanese: animeDetails.data.title_japanese,
-                            synopsis: animeDetails.data.synopsis,
-                            genres: animeDetails.data.genres,
-                            episodes: animeDetails.data.episodes,
-                            trailer: animeDetails.data.trailer
-                        }}
-                    />
+                    <>
+                        <AnimeDetails
+                            anime={{
+                                status: animeDetails.data.status,
+                                images: animeDetails.data.images,
+                                mal_id: animeDetails.data.mal_id,
+                                rank: animeDetails.data.rank,
+                                score: animeDetails.data.score,
+                                scored_by: animeDetails.data.scored_by,
+                                title: animeDetails.data.title,
+                                title_japanese: animeDetails.data.title_japanese,
+                                synopsis: animeDetails.data.synopsis,
+                                genres: animeDetails.data.genres,
+                                episodes: animeDetails.data.episodes,
+                                trailer: animeDetails.data.trailer
+                            }}
+                        />
+                        <div className="flex flex-col p-2">
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">Reviews</h1>
+                            {reviews && reviews.map((review: AnimeReviews, index: number) => (
+                                <Review key={index} review={review} />
+                            ))}
+                        </div>
+                    </>
                 )
             )}
-            <div className="flex flex-col p-2">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">Reviews</h1>
-                {reviews && reviews.map((review: AnimeReviews, index: number) => (
-                    <Review key={index} review={review} />
-                ))}
-            </div>
         </div>
     );
 }
