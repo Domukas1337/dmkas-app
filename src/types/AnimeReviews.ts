@@ -2,7 +2,6 @@ interface AnimeReviews {
     date: string;
     review: string;
     score: number;
-    tags: string[];
     user: {
       url: string;
       username: string;
