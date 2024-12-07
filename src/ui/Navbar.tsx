@@ -7,7 +7,7 @@ export default function Navbar() {
       <Link to="/" className="text-xl font-semibold ml-2 px-2 py-4 text-black dark:text-white">DMKAS</Link>
       <Search />
       <div className="bg-gray-800 px-2 rounded-md mr-4 text-gray-500 dark:text-white sm:text-base text-sm">
-        v1.0a
+        v1.1a
       </div>
     </div>
   )

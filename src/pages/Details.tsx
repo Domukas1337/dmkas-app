@@ -45,7 +45,7 @@ export default function Details() {
     console.log(reviews)
 
     return (
-        <div className="m-2 sm:m-4 md:m-6 fadein border-2 border-gray-400 rounded-lg">
+        <div className={`m-2 sm:m-4 md:m-6 fadein ${isLoading ? "" : "border-gray-400 border-2"} rounded-lg`}>
             {isLoading ? (
                 <Loading />
             ) : (

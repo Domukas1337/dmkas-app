@@ -38,7 +38,7 @@ export default function RandomAnime() {
     console.log(animeDetails)
 
     return (
-        <div className="m-2 sm:m-4 md:m-6 fadein border-2 border-gray-400 rounded-lg">
+        <div className={`m-2 sm:m-4 md:m-6 fadein ${isLoading ? "" : "border-gray-400 border-2"} rounded-lg`}>
             {isLoading ? (
                 <Loading />
             ) : (
