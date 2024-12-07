@@ -6,6 +6,7 @@ import Loading from "../ui/Loading"
 
 import Anime from "../types/Anime"
 import AnimeReviews from "../types/AnimeReviews"
+import { Link } from "react-router-dom"
 
 export default function RandomAnime() {
     const [isLoading, setIsLoading] = useState(true)
@@ -61,9 +62,15 @@ export default function RandomAnime() {
                         />
                         <div className="flex flex-col p-2">
                             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">Reviews</h1>
-                            {reviews && reviews.map((review: AnimeReviews, index: number) => (
+                            {reviews ? reviews.map((review: AnimeReviews, index: number) => (
                                 <Review key={index} review={review} />
-                            ))}
+                            )): (
+                                <p className="sm:text-lg md:text-2xl dark:text-gray-300 ">No reviews found</p>
+                            )}
+                        </div>
+                        <div className="flex flex-col p-2">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold dark:text-white text-center">Want to know more about this anime?</h3>
+                            <Link to={`https://myanimelist.net/anime/${animeDetails.data.mal_id}`} className="sm:text-lg md:text-2xl dark:text-gray-300 underline text-center">Click here</Link>
                         </div>
                     </>
                 )

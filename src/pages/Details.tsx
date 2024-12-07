@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import Anime from "../types/Anime"
 import AnimeReviews from "../types/AnimeReviews"
@@ -71,6 +72,10 @@ export default function Details() {
                             {reviews && reviews.map((review: AnimeReviews, index: number) => (
                                 <Review key={index} review={review} />
                             ))}
+                        </div>
+                        <div className="flex flex-col p-2">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold dark:text-white text-center">Want to know more about this anime?</h3>
+                            <Link to={`https://myanimelist.net/anime/${animeDetails.data.mal_id}`} className="sm:text-lg md:text-2xl dark:text-gray-300 underline text-center">Click here</Link>
                         </div>
                     </>
                 )
