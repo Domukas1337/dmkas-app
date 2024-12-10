@@ -18,13 +18,11 @@ export default function RandomAnime() {
             setIsLoading(true)
             const response = await fetch(`https://api.jikan.moe/v4/random/anime`)
             const data = await response.json()
-            console.log(data)
 
             const id = data.data.mal_id
 
             const responseReviews = await fetch(`https://api.jikan.moe/v4/anime/${id}/reviews`)
             const dataReviews = await responseReviews.json()
-            console.log(dataReviews.data)
 
             setReviews(dataReviews.data)
 

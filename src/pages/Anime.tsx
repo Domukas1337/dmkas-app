@@ -18,7 +18,6 @@ export default function Anime() {
             setIsLoading(true)
             const response = await fetch(`https://api.jikan.moe/v4/anime?q=${anime}`)
             const data = await response.json()
-            console.log(data)
 
             setAnimes(data.data)
             setIsLoading(false)
@@ -27,7 +26,6 @@ export default function Anime() {
         fetchAnime()
     }, [anime])
 
-    console.log(animes)
 
     return (
         <div className="flex flex-row flex-wrap justify-center">

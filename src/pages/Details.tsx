@@ -17,20 +17,17 @@ export default function Details() {
     const [searchParams] = useSearchParams()
     
     const id = searchParams.get('id')
-    console.log(id)
     
     useEffect(() => {
         async function fetchAnimeAndReviews() {
             setIsLoading(true)
             const responseDetails = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`)
             const dataDetails = await responseDetails.json()
-            console.log(dataDetails.data)
 
             setAnimeDetails(dataDetails)
 
             const responseReviews = await fetch(`https://api.jikan.moe/v4/anime/${id}/reviews`)
             const dataReviews = await responseReviews.json()
-            console.log(dataReviews.data)
 
             setReviews(dataReviews.data)
 
@@ -39,10 +36,6 @@ export default function Details() {
 
         fetchAnimeAndReviews()
     }, [id])
-
-    
-    console.log(animeDetails)
-    console.log(reviews)
 
     return (
         <div className={`m-2 sm:m-4 md:m-6 fadein ${isLoading ? "" : "border-gray-400 border-2"} rounded-lg`}>
