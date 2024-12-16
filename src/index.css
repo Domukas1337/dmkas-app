@@ -7,7 +7,7 @@
         @apply scroll-smooth;
     }
     body {
-        @apply bg-gray-100 dark:bg-slate-900
+        @apply bg-gray-100 dark:bg-black
     }
 }
 
