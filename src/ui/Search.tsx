@@ -10,7 +10,7 @@ export default function Search() {
 
     return (
         <div className="dark:text-white">
-            <div className={`flex flex-row justify-center items-center border ${searchValue ? "bg-red-300 dark:bg-red-700" : "bg-black"} border-gray-400 rounded-full transition-all duration-200`}>
+            <div className={`flex flex-row justify-center items-center border-2 ${searchValue ? "bg-red-300 dark:bg-red-700" : "bg-black"} border-gray-400 rounded-full transition-all duration-200`}>
                 <input 
                     type="text" 
                     placeholder="Search..." 
