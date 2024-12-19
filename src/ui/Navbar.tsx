@@ -6,7 +6,7 @@ export default function Navbar() {
     <div className="flex flex-row items-center justify-between mx-2 bg-white dark:bg-black border-b shadow-lg">
       <Link to="/" className="text-xl font-semibold ml-2 px-2 py-4 text-black dark:text-white">DMKAS</Link>
       <Search />
-      <div className="bg-gray-900 px-2 rounded-md mr-4 text-gray-500 dark:text-white sm:text-base text-sm">
+      <div className="px-2 rounded-md mr-4 text-gray-500 dark:text-white sm:text-base text-sm">
         v1.11a
       </div>
     </div>
