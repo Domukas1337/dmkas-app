@@ -20,8 +20,6 @@ export default function Search() {
                     onKeyDown={(event) => {
                         if (event.key === "Enter" && searchValue) {
                             window.location.href = `/anime?q=${searchValue}`
-                        } else {
-                            return
                         }
                     }}
                 />

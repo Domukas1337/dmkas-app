@@ -65,10 +65,13 @@ export default function Details() {
                             {reviews && reviews.map((review: AnimeReviews, index: number) => (
                                 <Review key={index} review={review} />
                             ))}
+                            {reviews.length === 0 && (
+                                <h3 className="sm:text-lg md:text-2xl dark:text-gray-300 text-center">No reviews found</h3>
+                            )}
                         </div>
                         <div className="flex flex-col p-2">
-                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold dark:text-white text-center">Want to know more about this anime?</h3>
-                            <Link to={`https://myanimelist.net/anime/${animeDetails.data.mal_id}`} className="sm:text-lg md:text-2xl dark:text-gray-300 underline text-center">Click here</Link>
+                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold dark:text-white text-center">Want to know more about this anime?</h3>
+                            <Link to={`https://myanimelist.net/anime/${animeDetails.data.mal_id}`} className="sm:text-lg md:text-xl dark:text-gray-300 underline text-center hover:text-white">Click here</Link>
                         </div>
                     </>
                 )
