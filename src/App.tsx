@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/anime/details",
-        element: <Details random={false} />,
+        element: <Details />,
       },
       {
         path: "/anime/random",

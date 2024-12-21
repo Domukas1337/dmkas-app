@@ -9,7 +9,7 @@ import AnimeDetails from "../components/AnimeDetails";
 import Loading from "../ui/Loading";
 import Review from "../components/Review";
 
-export default function Details({ random = false }: { random: boolean }) {
+export default function Details({ random = false }: { random?: boolean }) {
   const [isLoading, setIsLoading] = useState(true);
   const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(
     null
