@@ -1,65 +1,66 @@
-import { useEffect } from "react"
-import { useSearchParams } from "react-router-dom"
-import { useState } from "react"
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
-import AnimeCard from "../components/AnimeCard"
-import Loading from "../ui/Loading"
+import AnimeCard from "../components/AnimeCard";
+import Loading from "../ui/Loading";
 
 export default function Anime() {
-    const [isLoading, setIsLoading] = useState(true)
-    const [animes, setAnimes] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
+  const [animes, setAnimes] = useState([]);
 
-    const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
 
-    const anime = searchParams.get('q')
+  const anime = searchParams.get("q");
 
-    useEffect(() => {
-        async function fetchAnime() {
-            setIsLoading(true)
-            const response = await fetch(`https://api.jikan.moe/v4/anime?q=${anime}`)
-            const data = await response.json()
+  useEffect(() => {
+    async function fetchAnime() {
+      setIsLoading(true);
+      const response = await fetch(`https://api.jikan.moe/v4/anime?q=${anime}`);
+      const data = await response.json();
 
-            setAnimes(data.data)
-            setIsLoading(false)
-        }
+      setAnimes(data.data);
+      setIsLoading(false);
+    }
 
-        fetchAnime()
-    }, [anime])
+    fetchAnime();
+  }, [anime]);
 
-
-    return (
-        <div className="flex flex-row flex-wrap justify-center">
-            {isLoading ? (
-                <Loading />
-            ) : (
-                animes.map((anime: {
-                    status: string
-                    images: {
-                        jpg: {
-                            image_url: string
-                        }
-                    }
-                    mal_id: number
-                    rank: number
-                    score: number
-                    scored_by: number
-                    title: string
-                    title_japanese: string
-                }) => (
-                    <AnimeCard
-                        anime={{
-                            status: anime.status,
-                            images: anime.images,
-                            mal_id: anime.mal_id,
-                            rank: anime.rank,
-                            score: anime.score,
-                            scored_by: anime.scored_by,
-                            title: anime.title,
-                            title_japanese: anime.title_japanese,
-                        }}
-                    />
-                ))
-            )}
-        </div>
-    )
+  return (
+    <div className="flex flex-row flex-wrap justify-center">
+      {isLoading ? (
+        <Loading />
+      ) : (
+        animes.map(
+          (anime: {
+            status: string;
+            images: {
+              jpg: {
+                image_url: string;
+              };
+            };
+            mal_id: number;
+            rank: number;
+            score: number;
+            scored_by: number;
+            title: string;
+            title_japanese: string;
+          }) => (
+            <AnimeCard
+              anime={{
+                status: anime.status,
+                images: anime.images,
+                mal_id: anime.mal_id,
+                rank: anime.rank,
+                score: anime.score,
+                scored_by: anime.scored_by,
+                title: anime.title,
+                title_japanese: anime.title_japanese,
+              }}
+            />
+          )
+        )
+      )}
+    </div>
+  );
 }

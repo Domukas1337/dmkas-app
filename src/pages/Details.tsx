@@ -1,81 +1,103 @@
-import { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import Anime from "../types/Anime"
-import AnimeReviews from "../types/AnimeReviews"
+import Anime from "../types/Anime";
+import AnimeReviews from "../types/AnimeReviews";
 
-import AnimeDetails from "../components/AnimeDetails"
-import Loading from "../ui/Loading"
-import Review from "../components/Review"
+import AnimeDetails from "../components/AnimeDetails";
+import Loading from "../ui/Loading";
+import Review from "../components/Review";
 
 export default function Details() {
-    const [isLoading, setIsLoading] = useState(true)
-    const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(null)
-    const [reviews, setReviews] = useState([])
-    
-    const [searchParams] = useSearchParams()
-    
-    const id = searchParams.get('id')
-    
-    useEffect(() => {
-        async function fetchAnimeAndReviews() {
-            setIsLoading(true)
-            const responseDetails = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`)
-            const dataDetails = await responseDetails.json()
+  const [isLoading, setIsLoading] = useState(true);
+  const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(
+    null
+  );
+  const [reviews, setReviews] = useState([]);
 
-            setAnimeDetails(dataDetails)
+  const [searchParams] = useSearchParams();
 
-            const responseReviews = await fetch(`https://api.jikan.moe/v4/anime/${id}/reviews`)
-            const dataReviews = await responseReviews.json()
+  const id = searchParams.get("id");
 
-            setReviews(dataReviews.data)
+  useEffect(() => {
+    async function fetchAnimeAndReviews() {
+      setIsLoading(true);
+      const responseDetails = await fetch(
+        `https://api.jikan.moe/v4/anime/${id}/full`
+      );
+      const dataDetails = await responseDetails.json();
 
-            setIsLoading(false)
-        }
+      setAnimeDetails(dataDetails);
 
-        fetchAnimeAndReviews()
-    }, [id])
+      const responseReviews = await fetch(
+        `https://api.jikan.moe/v4/anime/${id}/reviews`
+      );
+      const dataReviews = await responseReviews.json();
 
-    return (
-        <div className={`m-2 sm:m-4 md:m-6 fadein ${isLoading ? "" : "border-gray-400 border-2"} rounded-lg`}>
-            {isLoading ? (
-                <Loading />
-            ) : (
-                animeDetails && (
-                    <>
-                        <AnimeDetails
-                            anime={{
-                                status: animeDetails.data.status,
-                                images: animeDetails.data.images,
-                                mal_id: animeDetails.data.mal_id,
-                                rank: animeDetails.data.rank,
-                                score: animeDetails.data.score,
-                                scored_by: animeDetails.data.scored_by,
-                                title: animeDetails.data.title,
-                                title_japanese: animeDetails.data.title_japanese,
-                                synopsis: animeDetails.data.synopsis,
-                                genres: animeDetails.data.genres,
-                                episodes: animeDetails.data.episodes,
-                                trailer: animeDetails.data.trailer
-                            }}
-                        />
-                        <div className="flex flex-col p-2">
-                            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">Reviews</h1>
-                            {reviews && reviews.map((review: AnimeReviews, index: number) => (
-                                <Review key={index} review={review} />
-                            ))}
-                            {reviews.length === 0 && (
-                                <h3 className="sm:text-lg md:text-2xl dark:text-gray-300 text-center">No reviews found</h3>
-                            )}
-                        </div>
-                        <div className="flex flex-col p-2">
-                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold dark:text-white text-center">Want to know more about this anime?</h3>
-                            <Link to={`https://myanimelist.net/anime/${animeDetails.data.mal_id}`} className="sm:text-lg md:text-xl dark:text-gray-300 underline text-center hover:text-white">Click here</Link>
-                        </div>
-                    </>
-                )
-            )}
-        </div>
-    );
+      setReviews(dataReviews.data);
+
+      setIsLoading(false);
+    }
+
+    fetchAnimeAndReviews();
+  }, [id]);
+
+  return (
+    <div
+      className={`m-2 sm:m-4 md:m-6 fadein ${
+        isLoading ? "" : "border-gray-400 border-2"
+      } rounded-lg`}
+    >
+      {isLoading ? (
+        <Loading />
+      ) : (
+        animeDetails && (
+          <>
+            <AnimeDetails
+              anime={{
+                status: animeDetails.data.status,
+                images: animeDetails.data.images,
+                mal_id: animeDetails.data.mal_id,
+                rank: animeDetails.data.rank,
+                score: animeDetails.data.score,
+                scored_by: animeDetails.data.scored_by,
+                title: animeDetails.data.title,
+                title_japanese: animeDetails.data.title_japanese,
+                synopsis: animeDetails.data.synopsis,
+                genres: animeDetails.data.genres,
+                episodes: animeDetails.data.episodes,
+                trailer: animeDetails.data.trailer,
+              }}
+            />
+            <div className="flex flex-col p-2">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">
+                Reviews
+              </h1>
+              {reviews &&
+                reviews.map((review: AnimeReviews, index: number) => (
+                  <Review key={index} review={review} />
+                ))}
+              {reviews.length === 0 && (
+                <h3 className="sm:text-lg md:text-2xl dark:text-gray-300 text-center">
+                  No reviews found
+                </h3>
+              )}
+            </div>
+            <div className="flex flex-col p-2">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold dark:text-white text-center">
+                Want to know more about this anime?
+              </h3>
+              <Link
+                to={`https://myanimelist.net/anime/${animeDetails.data.mal_id}`}
+                className="sm:text-lg md:text-xl dark:text-gray-300 underline text-center hover:text-white"
+              >
+                Click here
+              </Link>
+            </div>
+          </>
+        )
+      )}
+    </div>
+  );
 }
