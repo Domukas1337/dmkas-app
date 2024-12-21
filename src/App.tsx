@@ -5,7 +5,6 @@ import Homepage from "./pages/Homepage";
 import AppLayout from "./AppLayout";
 import Anime from "./pages/Anime";
 import Details from "./pages/Details";
-import RandomAnime from "./pages/RandomAnime";
 import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
@@ -23,11 +22,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/anime/details",
-        element: <Details />,
+        element: <Details random={false} />,
       },
       {
         path: "/anime/random",
-        element: <RandomAnime />,
+        element: <Details random={true} />,
       },
       {
         path: "*",

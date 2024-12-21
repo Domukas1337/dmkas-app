@@ -9,7 +9,7 @@ import AnimeDetails from "../components/AnimeDetails";
 import Loading from "../ui/Loading";
 import Review from "../components/Review";
 
-export default function Details() {
+export default function Details({ random = false }: { random: boolean }) {
   const [isLoading, setIsLoading] = useState(true);
   const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(
     null
@@ -20,24 +20,64 @@ export default function Details() {
 
   const id = searchParams.get("id");
 
+  if (!random && !id) {
+    return (
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold dark:text-white">
+          Something went wrong.
+        </h1>
+        <p className="sm:text-lg md:text-2xl dark:text-gray-300">
+          Please try again.
+        </p>
+        <Link
+          to="/"
+          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md mt-4"
+        >
+          Home
+        </Link>
+      </div>
+    );
+  }
+
   useEffect(() => {
     async function fetchAnimeAndReviews() {
       setIsLoading(true);
-      const responseDetails = await fetch(
-        `https://api.jikan.moe/v4/anime/${id}/full`
-      );
-      const dataDetails = await responseDetails.json();
+      if (random) {
+        const responseDetails = await fetch(
+          `https://api.jikan.moe/v4/random/anime`
+        );
+        const data = await responseDetails.json();
+        const id = data.data.mal_id;
 
-      setAnimeDetails(dataDetails);
+        setAnimeDetails(data);
 
-      const responseReviews = await fetch(
-        `https://api.jikan.moe/v4/anime/${id}/reviews`
-      );
-      const dataReviews = await responseReviews.json();
+        const responseReviews = await fetch(
+          `https://api.jikan.moe/v4/anime/${id}/reviews`
+        );
+        const dataReviews = await responseReviews.json();
 
-      setReviews(dataReviews.data);
+        setReviews(dataReviews.data);
 
-      setIsLoading(false);
+        setIsLoading(false);
+      } else {
+        // fetch details
+        const responseDetails = await fetch(
+          `https://api.jikan.moe/v4/anime/${id}/full`
+        );
+        const dataDetails = await responseDetails.json();
+
+        setAnimeDetails(dataDetails);
+
+        // fetch reviews
+        const responseReviews = await fetch(
+          `https://api.jikan.moe/v4/anime/${id}/reviews`
+        );
+        const dataReviews = await responseReviews.json();
+
+        setReviews(dataReviews.data);
+
+        setIsLoading(false);
+      }
     }
 
     fetchAnimeAndReviews();
