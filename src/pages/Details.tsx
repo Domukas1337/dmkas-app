@@ -11,6 +11,8 @@ import Review from "../components/Review";
 
 export default function Details({ random = false }: { random?: boolean }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingReviews, setIsLoadingReviews] = useState(false);
+  const [page, setPage] = useState(1);
   const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(
     null
   );
@@ -83,6 +85,22 @@ export default function Details({ random = false }: { random?: boolean }) {
     fetchAnimeAndReviews();
   }, [id]);
 
+  async function fetchPageReviews({ page }: { page: number }) {
+    setIsLoadingReviews(true);
+    const response = await fetch(
+      `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
+    );
+    const data = await response.json();
+
+    if (data.pagination.has_next_page === true) {
+      setPage(page);
+    }
+
+    setReviews(data.data);
+
+    setIsLoadingReviews(false);
+  }
+
   return (
     <div
       className={`m-2 sm:m-4 md:m-6 fadein ${
@@ -114,15 +132,43 @@ export default function Details({ random = false }: { random?: boolean }) {
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">
                 Reviews
               </h1>
-              {reviews &&
+              {isLoadingReviews ? (
+                <Loading />
+              ) : (
+                reviews &&
                 reviews.map((review: AnimeReviews, index: number) => (
                   <Review key={index} review={review} />
-                ))}
+                ))
+              )}
               {reviews.length === 0 && (
                 <h3 className="sm:text-lg md:text-2xl dark:text-gray-300 text-center">
                   No reviews found
                 </h3>
               )}
+            </div>
+            <div className="flex justify-center p-2 text-white">
+              <ul className="flex flex-row gap-2">
+                {page > 1 && (
+                  <li
+                    className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
+                    onClick={() => fetchPageReviews({ page: page - 1 })}
+                  >
+                    {page - 1}
+                  </li>
+                )}
+                <li
+                  className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
+                  onClick={() => fetchPageReviews({ page: page })}
+                >
+                  {page}
+                </li>
+                <li
+                  className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
+                  onClick={() => fetchPageReviews({ page: page + 1 })}
+                >
+                  {page + 1}
+                </li>
+              </ul>
             </div>
             <div className="flex flex-col p-2">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold dark:text-white text-center">
