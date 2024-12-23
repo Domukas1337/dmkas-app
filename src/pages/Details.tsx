@@ -157,7 +157,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                   </li>
                 )}
                 <li
-                  className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
+                  className="sm:text-lg md:text-2xl dark:text-black dark:bg-white px-2 rounded-lg cursor-pointer"
                   onClick={() => fetchPageReviews({ page: page })}
                 >
                   {page}
