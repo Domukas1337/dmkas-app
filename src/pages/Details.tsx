@@ -13,6 +13,7 @@ export default function Details({ random = false }: { random?: boolean }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingReviews, setIsLoadingReviews] = useState(false);
   const [page, setPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(true);
   const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(
     null
   );
@@ -48,6 +49,11 @@ export default function Details({ random = false }: { random?: boolean }) {
         const responseDetails = await fetch(
           `https://api.jikan.moe/v4/random/anime`
         );
+        if (!responseDetails.ok) {
+          setIsLoading(false);
+          throw new Error("Network response was not ok");
+        }
+
         const data = await responseDetails.json();
         const id = data.data.mal_id;
 
@@ -56,6 +62,10 @@ export default function Details({ random = false }: { random?: boolean }) {
         const responseReviews = await fetch(
           `https://api.jikan.moe/v4/anime/${id}/reviews`
         );
+        if (!responseReviews.ok) {
+          setIsLoading(false);
+          throw new Error("Network response was not ok");
+        }
         const dataReviews = await responseReviews.json();
 
         setReviews(dataReviews.data);
@@ -66,6 +76,10 @@ export default function Details({ random = false }: { random?: boolean }) {
         const responseDetails = await fetch(
           `https://api.jikan.moe/v4/anime/${id}/full`
         );
+        if (!responseDetails.ok) {
+          setIsLoading(false);
+          throw new Error("Network response was not ok");
+        }
         const dataDetails = await responseDetails.json();
 
         setAnimeDetails(dataDetails);
@@ -74,6 +88,10 @@ export default function Details({ random = false }: { random?: boolean }) {
         const responseReviews = await fetch(
           `https://api.jikan.moe/v4/anime/${id}/reviews`
         );
+        if (!responseReviews.ok) {
+          setIsLoading(false);
+          throw new Error("Network response was not ok");
+        }
         const dataReviews = await responseReviews.json();
 
         setReviews(dataReviews.data);
@@ -90,15 +108,21 @@ export default function Details({ random = false }: { random?: boolean }) {
     const response = await fetch(
       `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
     );
-    const data = await response.json();
-
-    if (data.pagination.has_next_page === true) {
-      setPage(page);
-    } else {
-      setPage(1);
+    if (!response.ok) {
+      setIsLoadingReviews(false);
+      throw new Error("Network response was not ok");
     }
 
-    setReviews(data.data);
+    const data = await response.json();
+
+    if (data.data.length > 0) {
+      setReviews(data.data);
+      setPage(page);
+      setHasNextPage(data.pagination.has_next_page);
+      console.log(data.pagination.has_next_page);
+    } else {
+      setHasNextPage(false);
+    }
     setIsLoadingReviews(false);
   }
 
@@ -151,25 +175,31 @@ export default function Details({ random = false }: { random?: boolean }) {
               <div className="flex justify-center p-2 text-white">
                 <ul className="flex flex-row gap-2">
                   {page > 1 && (
-                    <li
+                    <button
                       className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
                       onClick={() => fetchPageReviews({ page: page - 1 })}
                     >
                       {page - 1}
-                    </li>
+                    </button>
                   )}
-                  <li
+                  <button
                     className="sm:text-lg md:text-2xl dark:text-black dark:bg-white px-2 rounded-lg cursor-pointer"
                     onClick={() => fetchPageReviews({ page: page })}
                   >
                     {page}
-                  </li>
-                  <li
-                    className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
-                    onClick={() => fetchPageReviews({ page: page + 1 })}
+                  </button>
+                  <button
+                    className={`sm:text-lg md:text-2xl ${
+                      hasNextPage
+                        ? "dark:text-gray-300 cursor-pointer"
+                        : "text-gray-500 cursor-not-allowed"
+                    }`}
+                    onClick={() =>
+                      hasNextPage && fetchPageReviews({ page: page + 1 })
+                    }
                   >
                     {page + 1}
-                  </li>
+                  </button>
                 </ul>
               </div>
             )}
