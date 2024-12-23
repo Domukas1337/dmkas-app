@@ -94,10 +94,11 @@ export default function Details({ random = false }: { random?: boolean }) {
 
     if (data.pagination.has_next_page === true) {
       setPage(page);
+    } else {
+      setPage(1);
     }
 
     setReviews(data.data);
-
     setIsLoadingReviews(false);
   }
 
@@ -146,30 +147,32 @@ export default function Details({ random = false }: { random?: boolean }) {
                 </h3>
               )}
             </div>
-            <div className="flex justify-center p-2 text-white">
-              <ul className="flex flex-row gap-2">
-                {page > 1 && (
+            {reviews.length > 0 && (
+              <div className="flex justify-center p-2 text-white">
+                <ul className="flex flex-row gap-2">
+                  {page > 1 && (
+                    <li
+                      className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
+                      onClick={() => fetchPageReviews({ page: page - 1 })}
+                    >
+                      {page - 1}
+                    </li>
+                  )}
+                  <li
+                    className="sm:text-lg md:text-2xl dark:text-black dark:bg-white px-2 rounded-lg cursor-pointer"
+                    onClick={() => fetchPageReviews({ page: page })}
+                  >
+                    {page}
+                  </li>
                   <li
                     className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
-                    onClick={() => fetchPageReviews({ page: page - 1 })}
+                    onClick={() => fetchPageReviews({ page: page + 1 })}
                   >
-                    {page - 1}
+                    {page + 1}
                   </li>
-                )}
-                <li
-                  className="sm:text-lg md:text-2xl dark:text-black dark:bg-white px-2 rounded-lg cursor-pointer"
-                  onClick={() => fetchPageReviews({ page: page })}
-                >
-                  {page}
-                </li>
-                <li
-                  className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
-                  onClick={() => fetchPageReviews({ page: page + 1 })}
-                >
-                  {page + 1}
-                </li>
-              </ul>
-            </div>
+                </ul>
+              </div>
+            )}
             <div className="flex flex-col p-2">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold dark:text-white text-center">
                 Want to know more about this anime?
