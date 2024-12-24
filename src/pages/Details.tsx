@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import Anime from "../types/Anime";
 import AnimeReviews from "../types/AnimeReviews";
@@ -62,8 +63,10 @@ export default function Details({ random = false }: { random?: boolean }) {
         const responseReviews = await fetch(
           `https://api.jikan.moe/v4/anime/${id}/reviews`
         );
+
         if (!responseReviews.ok) {
           setIsLoading(false);
+          toast.error("Reviews not found.");
           throw new Error("Network response was not ok");
         }
         const dataReviews = await responseReviews.json();
@@ -78,6 +81,7 @@ export default function Details({ random = false }: { random?: boolean }) {
         );
         if (!responseDetails.ok) {
           setIsLoading(false);
+          toast.error("Page doesn't exist.");
           throw new Error("Network response was not ok");
         }
         const dataDetails = await responseDetails.json();
@@ -90,6 +94,7 @@ export default function Details({ random = false }: { random?: boolean }) {
         );
         if (!responseReviews.ok) {
           setIsLoading(false);
+          toast.error("Reviews not found.");
           throw new Error("Network response was not ok");
         }
         const dataReviews = await responseReviews.json();
@@ -113,6 +118,7 @@ export default function Details({ random = false }: { random?: boolean }) {
     if (!response.ok) {
       setHasNextPage(false);
       setIsLoadingReviews(false);
+      toast.error("Next page doesn't exist. Removing next page button.");
       throw new Error("Network response was not ok");
     }
 
@@ -124,6 +130,7 @@ export default function Details({ random = false }: { random?: boolean }) {
       setHasNextPage(data.pagination.has_next_page);
     } else {
       setHasNextPage(false);
+      toast.error("Next page doesn't exist. Removing next page button.");
     }
     setIsLoadingReviews(false);
   }
