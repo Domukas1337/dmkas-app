@@ -108,7 +108,10 @@ export default function Details({ random = false }: { random?: boolean }) {
     const response = await fetch(
       `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
     );
+    // if response is not ok, throw error and set next page to false
+    // it will hide the next page button after clicking it
     if (!response.ok) {
+      setHasNextPage(false);
       setIsLoadingReviews(false);
       throw new Error("Network response was not ok");
     }
@@ -119,7 +122,6 @@ export default function Details({ random = false }: { random?: boolean }) {
       setReviews(data.data);
       setPage(page);
       setHasNextPage(data.pagination.has_next_page);
-      console.log(data.pagination.has_next_page);
     } else {
       setHasNextPage(false);
     }
@@ -190,9 +192,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                   </button>
                   <button
                     className={`sm:text-lg md:text-2xl ${
-                      hasNextPage
-                        ? "dark:text-gray-300 cursor-pointer"
-                        : "text-gray-500 cursor-not-allowed"
+                      hasNextPage ? "dark:text-gray-300" : "hidden"
                     }`}
                     onClick={() =>
                       hasNextPage && fetchPageReviews({ page: page + 1 })
