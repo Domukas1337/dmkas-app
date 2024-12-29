@@ -7,7 +7,7 @@ export default function AnimeCard({ anime }: { anime: Anime }) {
   return (
     <Link
       to={`/anime/details?id=${anime.mal_id}`}
-      className="hover:scale-105 transition-all duration-200"
+      className="hover:scale-105 transition-all duration-200 fadein"
     >
       <div className="flex flex-row border border-gray-400 rounded-lg shadow-lg w-96 h-48 p-2 m-2 dark:text-white">
         <img
