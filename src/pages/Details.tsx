@@ -52,7 +52,7 @@ export default function Details({ random = false }: { random?: boolean }) {
         );
         if (!responseDetails.ok) {
           setIsLoading(false);
-          throw new Error("Network response was not ok");
+          toast.error("Page doesn't exist.");
         }
 
         const data = await responseDetails.json();
@@ -67,7 +67,6 @@ export default function Details({ random = false }: { random?: boolean }) {
         if (!responseReviews.ok) {
           setIsLoading(false);
           toast.error("Reviews not found.");
-          throw new Error("Network response was not ok");
         }
         const dataReviews = await responseReviews.json();
 
@@ -82,7 +81,6 @@ export default function Details({ random = false }: { random?: boolean }) {
         if (!responseDetails.ok) {
           setIsLoading(false);
           toast.error("Page doesn't exist.");
-          throw new Error("Network response was not ok");
         }
         const dataDetails = await responseDetails.json();
 
@@ -95,7 +93,6 @@ export default function Details({ random = false }: { random?: boolean }) {
         if (!responseReviews.ok) {
           setIsLoading(false);
           toast.error("Reviews not found.");
-          throw new Error("Network response was not ok");
         }
         const dataReviews = await responseReviews.json();
 
@@ -118,7 +115,7 @@ export default function Details({ random = false }: { random?: boolean }) {
     if (!response.ok) {
       setHasNextPage(false);
       setIsLoadingReviews(false);
-      toast.error("Next page doesn't exist. Removing next page button.");
+      toast.error("Next page doesn't exist.");
       throw new Error("Network response was not ok");
     }
 
@@ -130,7 +127,7 @@ export default function Details({ random = false }: { random?: boolean }) {
       setHasNextPage(data.pagination.has_next_page);
     } else {
       setHasNextPage(false);
-      toast.error("Next page doesn't exist. Removing next page button.");
+      toast.error("Next page doesn't exist.");
     }
     setIsLoadingReviews(false);
   }
