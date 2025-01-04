@@ -14,7 +14,9 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
       />
       <div className="flex flex-col gap-2 m-2 w-full">
         <div className="flex flex-row w-full justify-between">
-          <p className="text-3xl font-semibold text-white">{anime.title}</p>
+          <p className="lg:text-3xl text-2xl font-semibold text-white">
+            {anime.title}
+          </p>
         </div>
         <p className="text-xl text-gray-400">{anime.title_japanese}</p>
         <div className="flex flex-row gap-2">
