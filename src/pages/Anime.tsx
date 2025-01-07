@@ -29,7 +29,9 @@ export default function Anime() {
   return (
     <div className="flex flex-row flex-wrap justify-center">
       {isLoading ? (
-        <Loading />
+        <div className="my-7">
+          <Loading />
+        </div>
       ) : (
         animes.map(
           (anime: {
