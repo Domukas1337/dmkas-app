@@ -164,7 +164,9 @@ export default function Details({ random = false }: { random?: boolean }) {
                 Reviews
               </h1>
               {isLoadingReviews ? (
-                <Loading />
+                <div className="my-7">
+                  <Loading />
+                </div>
               ) : (
                 reviews &&
                 reviews.map((review: AnimeReviews, index: number) => (

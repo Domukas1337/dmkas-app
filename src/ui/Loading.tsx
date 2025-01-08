@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="flex flex-row justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <div role="status">
         <svg
           aria-hidden="true"
@@ -18,6 +18,11 @@ export default function Loading() {
             fill="currentFill"
           />
         </svg>
+      </div>
+      <div className="mt-4">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold dark:text-white">
+          Loading...
+        </h1>
       </div>
     </div>
   );

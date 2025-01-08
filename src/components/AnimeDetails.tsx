@@ -35,7 +35,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
             <h2 className="text-xl text-wrap text-white">#{anime.rank}</h2>
             <p className="text-xl text-gray-500 dark:text-gray-400">Ranking</p>
           </div>
-          <div>
+          <div className="mx-10">
             <div className="flex flex-row items-center">
               <h2 className="text-xl text-white">{anime.score}</h2>
               <FaStar className="text-yellow-400 text-xl pl-1" />
