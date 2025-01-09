@@ -133,16 +133,12 @@ export default function Details({ random = false }: { random?: boolean }) {
   }
 
   return (
-    <div
-      className={`m-2 sm:m-4 md:m-6 fadein ${
-        isLoading ? "" : "border-gray-400 border-2"
-      } rounded-lg`}
-    >
+    <div className="m-2 sm:m-4 md:m-6 fadein">
       {isLoading ? (
         <Loading />
       ) : (
         animeDetails && (
-          <>
+          <div className="pop-up border border-gray-400 rounded-lg">
             <AnimeDetails
               anime={{
                 status: animeDetails.data.status,
@@ -220,7 +216,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                 Click here
               </Link>
             </div>
-          </>
+          </div>
         )
       )}
     </div>

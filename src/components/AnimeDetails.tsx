@@ -10,7 +10,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
       <img
         src={anime.images.jpg.large_image_url}
         alt={anime.title}
-        className="rounded-lg m-2 border-2 object-fit border-gray-400 "
+        className="rounded-lg m-2 border-2 object-fit border-gray-400"
       />
       <div className="flex flex-col gap-2 m-2 w-full">
         <div className="flex flex-row w-full justify-between">

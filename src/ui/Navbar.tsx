@@ -12,7 +12,7 @@ export default function Navbar() {
       </Link>
       <Search />
       <div className="hidden sm:block px-2 rounded-md mr-4 text-gray-500 dark:text-white sm:text-base text-sm">
-        v1.25a
+        v1.3a
       </div>
     </nav>
   );

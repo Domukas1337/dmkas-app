@@ -20,6 +20,19 @@
   }
 }
 
+@keyframes pop-up {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+.pop-up {
+  animation: pop-up 0.3s ease-in-out;
+}
+
 .fadein {
   animation: fade-in 0.5s ease-in-out;
 }
