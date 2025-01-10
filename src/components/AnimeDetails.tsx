@@ -78,6 +78,13 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
           >
             <FaSquareXTwitter />
           </Link>
+          <Link
+            to={"https://myanimelist.net/anime/" + anime.mal_id}
+            target={"_blank"}
+            className="flex justify-center items-center font-bold text-center w-8 rounded-lg bg-white text-sm"
+          >
+            mAl
+          </Link>
         </div>
         <p className="text-white">MyAnimeList ID: {anime.mal_id}</p>
       </div>

@@ -105,7 +105,7 @@ export default function Details({ random = false }: { random?: boolean }) {
     fetchAnimeAndReviews();
   }, [id]);
 
-  async function fetchPageReviews({ page }: { page: number }) {
+  async function fetchReviews({ page }: { page: number }) {
     setIsLoadingReviews(true);
     const response = await fetch(
       `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
@@ -181,14 +181,14 @@ export default function Details({ random = false }: { random?: boolean }) {
                   {page > 1 && (
                     <button
                       className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
-                      onClick={() => fetchPageReviews({ page: page - 1 })}
+                      onClick={() => fetchReviews({ page: page - 1 })}
                     >
                       {page - 1}
                     </button>
                   )}
                   <button
                     className="sm:text-lg md:text-2xl dark:text-black dark:bg-white px-2 rounded-lg cursor-pointer"
-                    onClick={() => fetchPageReviews({ page: page })}
+                    onClick={() => fetchReviews({ page: page })}
                   >
                     {page}
                   </button>
@@ -197,7 +197,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                       hasNextPage ? "dark:text-gray-300" : "hidden"
                     }`}
                     onClick={() =>
-                      hasNextPage && fetchPageReviews({ page: page + 1 })
+                      hasNextPage && fetchReviews({ page: page + 1 })
                     }
                   >
                     {page + 1}
@@ -205,17 +205,6 @@ export default function Details({ random = false }: { random?: boolean }) {
                 </ul>
               </div>
             )}
-            <div className="flex flex-col p-2">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold dark:text-white text-center">
-                Want to know more about this anime?
-              </h3>
-              <Link
-                to={`https://myanimelist.net/anime/${animeDetails.data.mal_id}`}
-                className="sm:text-lg md:text-xl dark:text-gray-300 underline text-center hover:text-white"
-              >
-                Click here
-              </Link>
-            </div>
           </div>
         )
       )}
