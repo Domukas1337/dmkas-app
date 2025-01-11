@@ -7,7 +7,7 @@ import Anime from "../types/Anime";
 import AnimeReviews from "../types/AnimeReviews";
 
 import AnimeDetails from "../components/AnimeDetails";
-import Loading from "../ui/Loading";
+import Loading from "../components/Loading";
 import Review from "../components/Review";
 
 export default function Details({ random = false }: { random?: boolean }) {

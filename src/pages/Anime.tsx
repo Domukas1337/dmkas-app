@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 
 import AnimeCard from "../components/AnimeCard";
-import Loading from "../ui/Loading";
+import Loading from "../components/Loading";
 
 export default function Anime() {
   const [isLoading, setIsLoading] = useState(true);
