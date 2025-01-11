@@ -68,7 +68,16 @@ export default function Details({ random = false }: { random?: boolean }) {
           setIsLoading(false);
           toast.error("Reviews not found.");
         }
+
         const dataReviews = await responseReviews.json();
+
+        console.log(dataReviews.pagination.has_next_page);
+
+        if (dataReviews.pagination.has_next_page === true) {
+          setHasNextPage(true);
+        } else {
+          setHasNextPage(false);
+        }
 
         setReviews(dataReviews.data);
 
@@ -96,6 +105,14 @@ export default function Details({ random = false }: { random?: boolean }) {
         }
         const dataReviews = await responseReviews.json();
 
+        console.log(dataReviews.pagination.has_next_page);
+
+        if (dataReviews.pagination.has_next_page === true) {
+          setHasNextPage(true);
+        } else {
+          setHasNextPage(false);
+        }
+
         setReviews(dataReviews.data);
 
         setIsLoading(false);
@@ -120,6 +137,14 @@ export default function Details({ random = false }: { random?: boolean }) {
     }
 
     const data = await response.json();
+
+    console.log(data.pagination.has_next_page);
+
+    if (data.pagination.has_next_page === true) {
+      setHasNextPage(true);
+    } else {
+      setHasNextPage(false);
+    }
 
     if (data.data.length > 0) {
       setReviews(data.data);
@@ -178,6 +203,17 @@ export default function Details({ random = false }: { random?: boolean }) {
             {reviews.length > 0 && (
               <div className="flex justify-center p-2 text-white">
                 <ul className="flex flex-row gap-2">
+                  {page > 3 && (
+                    <>
+                      <button
+                        className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
+                        onClick={() => fetchReviews({ page: 1 })}
+                      >
+                        1
+                      </button>
+                      <span>...</span>
+                    </>
+                  )}
                   {page > 1 && (
                     <button
                       className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"

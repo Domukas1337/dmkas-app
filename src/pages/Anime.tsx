@@ -27,40 +27,51 @@ export default function Anime() {
   }, [anime]);
 
   return (
-    <div className="flex flex-row flex-wrap justify-center">
-      {isLoading ? (
-        <Loading />
-      ) : (
-        animes.map(
-          (anime: {
-            status: string;
-            images: {
-              jpg: {
-                image_url: string;
+    <div className="flex flex-col justify-center items-center">
+      <h1
+        className={`text-xl text-white mt-4 mb-2.5 ${
+          isLoading ? "hidden" : "fadein"
+        }`}
+      >
+        {animes.length > 0
+          ? `Found results: ${animes.length}`
+          : "No results found"}
+      </h1>
+      <div className="flex flex-row flex-wrap justify-center">
+        {isLoading ? (
+          <Loading />
+        ) : (
+          animes.map(
+            (anime: {
+              status: string;
+              images: {
+                jpg: {
+                  image_url: string;
+                };
               };
-            };
-            mal_id: number;
-            rank: number;
-            score: number;
-            scored_by: number;
-            title: string;
-            title_japanese: string;
-          }) => (
-            <AnimeCard
-              anime={{
-                status: anime.status,
-                images: anime.images,
-                mal_id: anime.mal_id,
-                rank: anime.rank,
-                score: anime.score,
-                scored_by: anime.scored_by,
-                title: anime.title,
-                title_japanese: anime.title_japanese,
-              }}
-            />
+              mal_id: number;
+              rank: number;
+              score: number;
+              scored_by: number;
+              title: string;
+              title_japanese: string;
+            }) => (
+              <AnimeCard
+                anime={{
+                  status: anime.status,
+                  images: anime.images,
+                  mal_id: anime.mal_id,
+                  rank: anime.rank,
+                  score: anime.score,
+                  scored_by: anime.scored_by,
+                  title: anime.title,
+                  title_japanese: anime.title_japanese,
+                }}
+              />
+            )
           )
-        )
-      )}
+        )}
+      </div>
     </div>
   );
 }
