@@ -11,7 +11,7 @@ export default function Search() {
   return (
     <div
       className={`flex flex-row justify-center items-center border-2 hover:border-red-500 ${
-        searchValue ? "bg-red-300 dark:bg-red-700" : "bg-black"
+        searchValue ? "bg-red-300 dark:bg-red-700 border-red-500" : "bg-black"
       } border-gray-400 rounded-full transition-all duration-200`}
     >
       <input
