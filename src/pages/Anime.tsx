@@ -67,6 +67,7 @@ export default function Anime() {
                   title: anime.title,
                   title_japanese: anime.title_japanese,
                 }}
+                key={anime.mal_id}
               />
             )
           )

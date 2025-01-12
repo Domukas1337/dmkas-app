@@ -61,7 +61,7 @@ export default function Details({ random = false }: { random?: boolean }) {
         setAnimeDetails(data);
 
         const responseReviews = await fetch(
-          `https://api.jikan.moe/v4/anime/${id}/reviews`
+          `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
         );
 
         if (!responseReviews.ok) {
@@ -97,14 +97,13 @@ export default function Details({ random = false }: { random?: boolean }) {
 
         // fetch reviews
         const responseReviews = await fetch(
-          `https://api.jikan.moe/v4/anime/${id}/reviews`
+          `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
         );
         if (!responseReviews.ok) {
           setIsLoading(false);
           toast.error("Reviews not found.");
         }
         const dataReviews = await responseReviews.json();
-
         console.log(dataReviews.pagination.has_next_page);
 
         if (dataReviews.pagination.has_next_page === true) {
