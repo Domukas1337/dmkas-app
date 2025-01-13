@@ -1,30 +1,27 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 
 import AnimeCard from "../components/AnimeCard";
 import Loading from "../components/Loading";
+import useAnime from "../hooks/useAnime";
+import Anime from "../types/Anime";
 
-export default function Anime() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [animes, setAnimes] = useState([]);
+export default function AnimePage() {
+  const [animes, setAnimes] = useState<Anime[]>([]);
 
-  const [searchParams] = useSearchParams();
-
-  const anime = searchParams.get("q");
+  const { isLoading, error, data } = useAnime();
 
   useEffect(() => {
-    async function fetchAnime() {
-      setIsLoading(true);
-      const response = await fetch(`https://api.jikan.moe/v4/anime?q=${anime}`);
-      const data = await response.json();
-
-      setAnimes(data.data);
-      setIsLoading(false);
+    if (data) {
+      setAnimes(data as Anime[]);
+    } else {
+      setAnimes([]);
     }
+  }, [data]);
 
-    fetchAnime();
-  }, [anime]);
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -41,36 +38,21 @@ export default function Anime() {
         {isLoading ? (
           <Loading />
         ) : (
-          animes.map(
-            (anime: {
-              status: string;
-              images: {
-                jpg: {
-                  image_url: string;
-                };
-              };
-              mal_id: number;
-              rank: number;
-              score: number;
-              scored_by: number;
-              title: string;
-              title_japanese: string;
-            }) => (
-              <AnimeCard
-                anime={{
-                  status: anime.status,
-                  images: anime.images,
-                  mal_id: anime.mal_id,
-                  rank: anime.rank,
-                  score: anime.score,
-                  scored_by: anime.scored_by,
-                  title: anime.title,
-                  title_japanese: anime.title_japanese,
-                }}
-                key={anime.mal_id}
-              />
-            )
-          )
+          animes.map((anime: Anime) => (
+            <AnimeCard
+              anime={{
+                status: anime.status,
+                images: anime.images,
+                mal_id: anime.mal_id,
+                rank: anime.rank,
+                score: anime.score,
+                scored_by: anime.scored_by,
+                title: anime.title,
+                title_japanese: anime.title_japanese,
+              }}
+              key={anime.mal_id}
+            />
+          ))
         )}
       </div>
     </div>

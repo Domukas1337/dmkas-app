@@ -7,6 +7,7 @@ import Anime from "./pages/Anime";
 import Details from "./pages/Details";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -37,9 +38,17 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+});
+
 export default function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <Toaster
         position="top-center"
@@ -58,6 +67,6 @@ export default function App() {
           },
         }}
       />
-    </>
+    </QueryClientProvider>
   );
 }
