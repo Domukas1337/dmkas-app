@@ -9,17 +9,15 @@ import AnimeReviews from "../types/AnimeReviews";
 import AnimeDetails from "../components/AnimeDetails";
 import Loading from "../components/Loading";
 import Review from "../components/Review";
+import useReviews from "../hooks/useReviews";
 
 export default function Details({ random = false }: { random?: boolean }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingReviews, setIsLoadingReviews] = useState(false);
   const [page, setPage] = useState(1);
-  const [hasNextPage, setHasNextPage] = useState(true);
   const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(
     null
   );
-  const [reviews, setReviews] = useState([]);
-
+  const [reviews, setReviews] = useState<AnimeReviews[]>([]);
   const [searchParams] = useSearchParams();
 
   const id = searchParams.get("id");
@@ -44,7 +42,7 @@ export default function Details({ random = false }: { random?: boolean }) {
   }
 
   useEffect(() => {
-    async function fetchAnimeAndReviews() {
+    async function fetchAnime() {
       setIsLoading(true);
       if (random) {
         const responseDetails = await fetch(
@@ -56,30 +54,30 @@ export default function Details({ random = false }: { random?: boolean }) {
         }
 
         const data = await responseDetails.json();
-        const id = data.data.mal_id;
+        // const id = data.data.mal_id;
 
         setAnimeDetails(data);
 
-        const responseReviews = await fetch(
-          `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
-        );
+        // const responseReviews = await fetch(
+        //   `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
+        // );
 
-        if (!responseReviews.ok) {
-          setIsLoading(false);
-          toast.error("Reviews not found.");
-        }
+        // if (!responseReviews.ok) {
+        //   setIsLoading(false);
+        //   toast.error("Reviews not found.");
+        // }
 
-        const dataReviews = await responseReviews.json();
+        // const dataReviews = await responseReviews.json();
 
-        console.log(dataReviews.pagination.has_next_page);
+        // console.log(dataReviews.pagination.has_next_page);
 
-        if (dataReviews.pagination.has_next_page === true) {
-          setHasNextPage(true);
-        } else {
-          setHasNextPage(false);
-        }
+        // if (dataReviews.pagination.has_next_page === true) {
+        //   setHasNextPage(true);
+        // } else {
+        //   setHasNextPage(false);
+        // }
 
-        setReviews(dataReviews.data);
+        // setReviews(dataReviews.data);
 
         setIsLoading(false);
       } else {
@@ -96,65 +94,48 @@ export default function Details({ random = false }: { random?: boolean }) {
         setAnimeDetails(dataDetails);
 
         // fetch reviews
-        const responseReviews = await fetch(
-          `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
-        );
-        if (!responseReviews.ok) {
-          setIsLoading(false);
-          toast.error("Reviews not found.");
-        }
-        const dataReviews = await responseReviews.json();
-        console.log(dataReviews.pagination.has_next_page);
+        // const responseReviews = await fetch(
+        //   `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
+        // );
+        // if (!responseReviews.ok) {
+        //   setIsLoading(false);
+        //   toast.error("Reviews not found.");
+        // }
+        // const dataReviews = await responseReviews.json();
+        // console.log(dataReviews.pagination.has_next_page);
 
-        if (dataReviews.pagination.has_next_page === true) {
-          setHasNextPage(true);
-        } else {
-          setHasNextPage(false);
-        }
+        // if (dataReviews.pagination.has_next_page === true) {
+        //   setHasNextPage(true);
+        // } else {
+        //   setHasNextPage(false);
+        // }
 
-        setReviews(dataReviews.data);
+        // setReviews(dataReviews.data);
 
         setIsLoading(false);
       }
     }
 
-    fetchAnimeAndReviews();
+    fetchAnime();
   }, [id]);
 
-  async function fetchReviews({ page }: { page: number }) {
-    setIsLoadingReviews(true);
-    const response = await fetch(
-      `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
-    );
-    // if response is not ok, throw error and set next page to false
-    // it will hide the next page button after clicking it
-    if (!response.ok) {
-      setHasNextPage(false);
-      setIsLoadingReviews(false);
-      toast.error("Next page doesn't exist.");
-      throw new Error("Network response was not ok");
+  const {
+    isLoading: isLoadingReviews,
+    error,
+    reviews: fetchedReviews,
+    hasNextPage,
+  } = useReviews({
+    id: Number(id),
+    page,
+  });
+
+  console.log(error);
+
+  useEffect(() => {
+    if (!isLoadingReviews) {
+      setReviews(fetchedReviews!);
     }
-
-    const data = await response.json();
-
-    console.log(data.pagination.has_next_page);
-
-    if (data.pagination.has_next_page === true) {
-      setHasNextPage(true);
-    } else {
-      setHasNextPage(false);
-    }
-
-    if (data.data.length > 0) {
-      setReviews(data.data);
-      setPage(page);
-      setHasNextPage(data.pagination.has_next_page);
-    } else {
-      setHasNextPage(false);
-      toast.error("Next page doesn't exist.");
-    }
-    setIsLoadingReviews(false);
-  }
+  }, [fetchedReviews, isLoadingReviews]);
 
   return (
     <div className="m-2 sm:m-4 md:m-6 fadein">
@@ -183,7 +164,7 @@ export default function Details({ random = false }: { random?: boolean }) {
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">
                 Reviews
               </h1>
-              {isLoadingReviews ? (
+              {isLoadingReviews && reviews.length !== 0 ? (
                 <div className="my-7">
                   <Loading />
                 </div>
@@ -206,7 +187,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                     <>
                       <button
                         className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
-                        onClick={() => fetchReviews({ page: 1 })}
+                        onClick={() => setPage(1)}
                       >
                         1
                       </button>
@@ -216,14 +197,14 @@ export default function Details({ random = false }: { random?: boolean }) {
                   {page > 1 && (
                     <button
                       className="sm:text-lg md:text-2xl dark:text-gray-300 cursor-pointer"
-                      onClick={() => fetchReviews({ page: page - 1 })}
+                      onClick={() => setPage(page - 1)}
                     >
                       {page - 1}
                     </button>
                   )}
                   <button
                     className="sm:text-lg md:text-2xl dark:text-black dark:bg-white px-2 rounded-lg cursor-pointer"
-                    onClick={() => fetchReviews({ page: page })}
+                    onClick={() => setPage(page)}
                   >
                     {page}
                   </button>
@@ -231,9 +212,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                     className={`sm:text-lg md:text-2xl ${
                       hasNextPage ? "dark:text-gray-300" : "hidden"
                     }`}
-                    onClick={() =>
-                      hasNextPage && fetchReviews({ page: page + 1 })
-                    }
+                    onClick={() => hasNextPage && setPage(page + 1)}
                   >
                     {page + 1}
                   </button>

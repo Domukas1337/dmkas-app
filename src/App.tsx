@@ -12,7 +12,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
-    errorElement: <div className="text-red-500">Something went wrong.</div>,
     children: [
       {
         path: "/",
