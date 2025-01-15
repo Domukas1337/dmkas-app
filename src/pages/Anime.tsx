@@ -13,7 +13,7 @@ export default function AnimePage() {
 
   useEffect(() => {
     if (data) {
-      setAnimes(data as Anime[]);
+      setAnimes(data! as Anime[]);
     } else {
       setAnimes([]);
     }
@@ -38,6 +38,7 @@ export default function AnimePage() {
         {isLoading ? (
           <Loading />
         ) : (
+          animes &&
           animes.map((anime: Anime) => (
             <AnimeCard
               anime={{

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 import Anime from "../types/Anime";
 import AnimeReviews from "../types/AnimeReviews";
@@ -10,9 +10,10 @@ import AnimeDetails from "../components/AnimeDetails";
 import Loading from "../components/Loading";
 import Review from "../components/Review";
 import useReviews from "../hooks/useReviews";
+import useAnimeDetails from "../hooks/useAnimeDetails";
 
 export default function Details({ random = false }: { random?: boolean }) {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(
     null
@@ -41,83 +42,22 @@ export default function Details({ random = false }: { random?: boolean }) {
     );
   }
 
+  const {
+    isLoading: isLoadingDetails,
+    error: errorDetails,
+    data,
+  } = useAnimeDetails({
+    id: Number(id),
+    random,
+  });
+
   useEffect(() => {
-    async function fetchAnime() {
-      setIsLoading(true);
-      if (random) {
-        const responseDetails = await fetch(
-          `https://api.jikan.moe/v4/random/anime`
-        );
-        if (!responseDetails.ok) {
-          setIsLoading(false);
-          toast.error("Page doesn't exist.");
-        }
-
-        const data = await responseDetails.json();
-        // const id = data.data.mal_id;
-
-        setAnimeDetails(data);
-
-        // const responseReviews = await fetch(
-        //   `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
-        // );
-
-        // if (!responseReviews.ok) {
-        //   setIsLoading(false);
-        //   toast.error("Reviews not found.");
-        // }
-
-        // const dataReviews = await responseReviews.json();
-
-        // console.log(dataReviews.pagination.has_next_page);
-
-        // if (dataReviews.pagination.has_next_page === true) {
-        //   setHasNextPage(true);
-        // } else {
-        //   setHasNextPage(false);
-        // }
-
-        // setReviews(dataReviews.data);
-
-        setIsLoading(false);
-      } else {
-        // fetch details
-        const responseDetails = await fetch(
-          `https://api.jikan.moe/v4/anime/${id}/full`
-        );
-        if (!responseDetails.ok) {
-          setIsLoading(false);
-          toast.error("Page doesn't exist.");
-        }
-        const dataDetails = await responseDetails.json();
-
-        setAnimeDetails(dataDetails);
-
-        // fetch reviews
-        // const responseReviews = await fetch(
-        //   `https://api.jikan.moe/v4/anime/${id}/reviews?page=${page}`
-        // );
-        // if (!responseReviews.ok) {
-        //   setIsLoading(false);
-        //   toast.error("Reviews not found.");
-        // }
-        // const dataReviews = await responseReviews.json();
-        // console.log(dataReviews.pagination.has_next_page);
-
-        // if (dataReviews.pagination.has_next_page === true) {
-        //   setHasNextPage(true);
-        // } else {
-        //   setHasNextPage(false);
-        // }
-
-        // setReviews(dataReviews.data);
-
-        setIsLoading(false);
-      }
+    if (!isLoadingDetails) {
+      setAnimeDetails(data!);
     }
+  }, [data, isLoadingDetails]);
 
-    fetchAnime();
-  }, [id]);
+  console.log(errorDetails);
 
   const {
     isLoading: isLoadingReviews,
@@ -139,10 +79,11 @@ export default function Details({ random = false }: { random?: boolean }) {
 
   return (
     <div className="m-2 sm:m-4 md:m-6 fadein">
-      {isLoading ? (
+      {isLoadingDetails ? (
         <Loading />
       ) : (
-        animeDetails && (
+        animeDetails &&
+        animeDetails.data && (
           <div className="pop-up border border-gray-400 rounded-lg">
             <AnimeDetails
               anime={{

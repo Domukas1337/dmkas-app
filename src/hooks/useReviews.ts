@@ -8,7 +8,7 @@ export default function useReviews({ id, page }: { id: number; page: number }) {
     queryFn: () => getReviews(id, page),
   });
 
-  const hasNextPage = data?.pagination.has_next_page ?? false;
+  const hasNextPage = data?.pagination?.has_next_page ?? false;
 
   // pre-fetch next page
   if (hasNextPage) {
@@ -18,5 +18,5 @@ export default function useReviews({ id, page }: { id: number; page: number }) {
     });
   }
 
-  return { isLoading, error, reviews: data?.data, hasNextPage };
+  return { isLoading, error, reviews: data?.data ?? [], hasNextPage };
 }
