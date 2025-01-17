@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className="flex flex-row items-center justify-between mx-2 bg-white dark:bg-black border-b shadow-lg">
       <Link
         to="/"
-        className="text-xl font-semibold ml-2 px-2 py-4 text-black dark:text-white select-none hover:text-red-500"
+        className="text-xl font-semibold ml-2 px-2 py-4 text-black dark:text-white select-none hover:text-red-500 transition-colors duration-200"
       >
         DMKAS
       </Link>

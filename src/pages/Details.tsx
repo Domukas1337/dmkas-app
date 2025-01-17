@@ -13,7 +13,6 @@ import useReviews from "../hooks/useReviews";
 import useAnimeDetails from "../hooks/useAnimeDetails";
 
 export default function Details({ random = false }: { random?: boolean }) {
-  // const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [animeDetails, setAnimeDetails] = useState<{ data: Anime } | null>(
     null
@@ -57,7 +56,18 @@ export default function Details({ random = false }: { random?: boolean }) {
     }
   }, [data, isLoadingDetails]);
 
-  console.log(errorDetails);
+  if (errorDetails) {
+    return (
+      <div>
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold dark:text-white">
+          Something went wrong.
+        </h1>
+        <p className="sm:text-lg md:text-2xl dark:text-gray-300">
+          Please try again.
+        </p>
+      </div>
+    );
+  }
 
   const {
     isLoading: isLoadingReviews,
@@ -69,7 +79,16 @@ export default function Details({ random = false }: { random?: boolean }) {
     page,
   });
 
-  console.log(error);
+  if (error) {
+    <div>
+      <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold dark:text-white">
+        Something went wrong.
+      </h1>
+      <p className="sm:text-lg md:text-2xl dark:text-gray-300">
+        Please try again.
+      </p>
+    </div>;
+  }
 
   useEffect(() => {
     if (!isLoadingReviews) {

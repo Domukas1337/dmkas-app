@@ -37,15 +37,17 @@ export default function Review({ review }: { review: AnimeReviews }) {
         <p className="dark:text-gray-300">{review.review.slice(0, 350)}...</p>
       )}
       {review.review.length > 350 && !showMore ? (
-        <p
-          className="dark:text-white text-lg cursor-pointer"
-          onClick={() => setShowMore(true)}
-        >
-          Show more
-        </p>
+        <div className="flex flex-row justify-start">
+          <p
+            className="dark:text-white text-lg cursor-pointer hover:text-red-300 transition-colors duration-150"
+            onClick={() => setShowMore(true)}
+          >
+            Show more
+          </p>
+        </div>
       ) : (
         <p
-          className="dark:text-white text-lg cursor-pointer"
+          className="dark:text-white text-lg cursor-pointer hover:text-red-300 transition-colors duration-150"
           onClick={() => setShowMore(false)}
         >
           Show less
@@ -61,7 +63,7 @@ export default function Review({ review }: { review: AnimeReviews }) {
           Score: {review.score}
         </p>
         <p className="text-base dark:text-gray-300 ">
-          Date: {review.date.split("T")[0]}
+          {review.date.split("T")[0]}
         </p>
       </div>
     </div>

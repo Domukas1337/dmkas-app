@@ -10,7 +10,7 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
       <img
         src={anime.images.jpg.large_image_url}
         alt={anime.title}
-        className="rounded-lg m-2 border-2 object-fit border-gray-400"
+        className="rounded-lg m-2 border-2 object-cover border-gray-400"
       />
       <div className="flex flex-col gap-2 m-2 w-full">
         <div className="flex flex-row w-full justify-between">
@@ -67,21 +67,21 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
           <Link
             to={"https://www.youtube.com/watch?v=" + anime.trailer?.youtube_id}
             target="_blank"
-            className="w-8 p-2 rounded-lg bg-white"
+            className="w-8 p-2 rounded-lg bg-white hover:scale-105 transition-all duration-100"
           >
             <FaYoutube />
           </Link>
           <Link
             to={"https://x.com/search?q=" + anime.title}
             target="_blank"
-            className="w-8 p-2 rounded-lg bg-white"
+            className="w-8 p-2 rounded-lg bg-white hover:scale-105 transition-all duration-100"
           >
             <FaSquareXTwitter />
           </Link>
           <Link
             to={"https://myanimelist.net/anime/" + anime.mal_id}
             target={"_blank"}
-            className="flex justify-center items-center font-bold text-center w-8 rounded-lg bg-white text-sm"
+            className="flex justify-center items-center font-bold text-center w-8 rounded-lg bg-white text-sm hover:scale-105 transition-all duration-100"
           >
             mAl
           </Link>

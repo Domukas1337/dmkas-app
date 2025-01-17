@@ -16,7 +16,7 @@ export default function Homepage() {
         </p>
         <Link
           to="/anime/random"
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md mt-4"
+          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md mt-4 transition-colors duration-200"
         >
           Random
         </Link>
