@@ -29,12 +29,27 @@
   }
 }
 
+@keyframes homepage-intro {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .pop-up {
   animation: pop-up 0.3s ease-in-out;
 }
 
 .fadein {
   animation: fade-in 0.5s ease-in-out;
+}
+
+.homepage-intro {
+  animation: homepage-intro 0.78s ease-in-out;
 }
 
 body {

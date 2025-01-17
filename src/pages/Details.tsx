@@ -131,7 +131,9 @@ export default function Details({ random = false }: { random?: boolean }) {
               ) : (
                 reviews &&
                 reviews.map((review: AnimeReviews, index: number) => (
-                  <Review key={index} review={review} />
+                  <div className="homepage-intro">
+                    <Review key={index} review={review} />
+                  </div>
                 ))
               )}
               {reviews.length === 0 && (
