@@ -64,13 +64,17 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
         </div>
         <p className="text-white pr-4">{anime.synopsis}</p>
         <div className="flex gap-2">
-          <Link
-            to={"https://www.youtube.com/watch?v=" + anime.trailer?.youtube_id}
-            target="_blank"
-            className="w-8 p-2 rounded-lg bg-white hover:scale-105 transition-all duration-100"
-          >
-            <FaYoutube />
-          </Link>
+          {anime.trailer?.youtube_id === null ? null : (
+            <Link
+              to={
+                "https://www.youtube.com/watch?v=" + anime.trailer?.youtube_id
+              }
+              target="_blank"
+              className="w-8 p-2 rounded-lg bg-white hover:scale-105 transition-all duration-100"
+            >
+              <FaYoutube />
+            </Link>
+          )}
           <Link
             to={"https://x.com/search?q=" + anime.title}
             target="_blank"
