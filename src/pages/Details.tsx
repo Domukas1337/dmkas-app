@@ -60,10 +60,10 @@ export default function Details({ random = false }: { random?: boolean }) {
     return (
       <div>
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold dark:text-white">
-          Something went wrong.
+          Failed to fetch details.
         </h1>
         <p className="sm:text-lg md:text-2xl dark:text-gray-300">
-          Please try again.
+          Refresh the page to try again.
         </p>
       </div>
     );
@@ -71,24 +71,13 @@ export default function Details({ random = false }: { random?: boolean }) {
 
   const {
     isLoading: isLoadingReviews,
-    error,
+    error: errorReviews,
     reviews: fetchedReviews,
     hasNextPage,
   } = useReviews({
     id: Number(id),
     page,
   });
-
-  if (error) {
-    <div>
-      <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold dark:text-white">
-        Something went wrong.
-      </h1>
-      <p className="sm:text-lg md:text-2xl dark:text-gray-300">
-        Please try again.
-      </p>
-    </div>;
-  }
 
   useEffect(() => {
     if (!isLoadingReviews) {
@@ -130,6 +119,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                 </div>
               ) : (
                 reviews &&
+                !errorReviews &&
                 reviews.map((review: AnimeReviews, index: number) => (
                   <div className="homepage-intro">
                     <Review key={index} review={review} />
@@ -141,8 +131,13 @@ export default function Details({ random = false }: { random?: boolean }) {
                   No reviews found
                 </h3>
               )}
+              {errorReviews && (
+                <h3 className="sm:text-lg md:text-2xl dark:text-gray-300 text-center">
+                  Failed to fetch reviews
+                </h3>
+              )}
             </div>
-            {reviews.length > 0 && (
+            {reviews.length > 0 && !errorReviews && (
               <div className="flex justify-center p-2 text-white">
                 <ul className="flex flex-row gap-2">
                   {page > 3 && (
@@ -174,7 +169,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                     className={`sm:text-lg md:text-2xl ${
                       hasNextPage ? "dark:text-gray-300" : "hidden"
                     }`}
-                    onClick={() => hasNextPage && setPage(page + 1)}
+                    onClick={() => setPage(page + 1)}
                   >
                     {page + 1}
                   </button>

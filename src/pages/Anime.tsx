@@ -19,21 +19,51 @@ export default function AnimePage() {
     }
   }, [data]);
 
+  function sortByRating() {
+    const sortedAnimes = [...animes];
+    sortedAnimes.sort((a, b) => b.score - a.score);
+    setAnimes(sortedAnimes);
+  }
+
+  function sortByTitle() {
+    const sortedAnimes = [...animes];
+    sortedAnimes.sort((a, b) => a.title.localeCompare(b.title));
+    setAnimes(sortedAnimes);
+  }
+
+  function sortByDefault() {
+    setAnimes(data! as Anime[]);
+  }
+
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <h1
-        className={`text-xl text-white mt-4 mb-2.5 ${
+      <div
+        className={`flex flex-row justify-between items-center w-screen px-10 gap-10 mt-4 ${
           isLoading ? "hidden" : "fadein"
         }`}
       >
-        {animes.length > 0
-          ? `Found results: ${animes.length}`
-          : "No results found"}
-      </h1>
+        <p className=" text-white">{animes.length} results</p>
+        <div className="flex gap-10">
+          <select
+            name="sortBy"
+            className="px-4 py-2 rounded-lg bg-white cursor-pointer"
+          >
+            <option value="default" onClick={sortByDefault}>
+              Relevant
+            </option>
+            <option value="rating" onClick={sortByRating}>
+              Rating
+            </option>
+            <option value="title" onClick={sortByTitle}>
+              Title
+            </option>
+          </select>
+        </div>
+      </div>
       <div className="flex flex-row flex-wrap justify-center">
         {isLoading ? (
           <Loading />

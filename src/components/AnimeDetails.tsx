@@ -90,7 +90,6 @@ export default function AnimeDetails({ anime }: { anime: Anime }) {
             mAl
           </Link>
         </div>
-        <p className="text-white">MyAnimeList ID: {anime.mal_id}</p>
       </div>
     </div>
   );
