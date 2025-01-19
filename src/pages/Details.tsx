@@ -83,16 +83,16 @@ export default function Details({ random = false }: { random?: boolean }) {
     if (!isLoadingReviews) {
       setReviews(fetchedReviews!);
     }
-  }, [fetchedReviews, isLoadingReviews]);
+  }, [isLoadingReviews, fetchedReviews]);
 
   return (
-    <div className="m-2 sm:m-4 md:m-6 fadein">
+    <div className="m-2 sm:m-4 md:m-6">
       {isLoadingDetails ? (
         <Loading />
       ) : (
         animeDetails &&
         animeDetails.data && (
-          <div className="pop-up border border-gray-400 rounded-lg">
+          <div className="pop-up border border-gray-400 rounded-lg fadein">
             <AnimeDetails
               anime={{
                 status: animeDetails.data.status,
@@ -121,8 +121,8 @@ export default function Details({ random = false }: { random?: boolean }) {
                 reviews &&
                 !errorReviews &&
                 reviews.map((review: AnimeReviews, index: number) => (
-                  <div className="homepage-intro">
-                    <Review key={index} review={review} />
+                  <div className="homepage-intro" key={index}>
+                    <Review review={review} key={index} />
                   </div>
                 ))
               )}
