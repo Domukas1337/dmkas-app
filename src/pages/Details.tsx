@@ -113,7 +113,7 @@ export default function Details({ random = false }: { random?: boolean }) {
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">
                 Reviews
               </h1>
-              {isLoadingReviews && reviews.length !== 0 ? (
+              {isLoadingReviews ? (
                 <div className="my-7">
                   <Loading />
                 </div>
@@ -126,7 +126,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                   </div>
                 ))
               )}
-              {reviews.length === 0 && (
+              {reviews.length === 0 && !isLoadingReviews && (
                 <h3 className="sm:text-lg md:text-2xl dark:text-gray-300 text-center">
                   No reviews found
                 </h3>

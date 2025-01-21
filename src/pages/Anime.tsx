@@ -53,7 +53,7 @@ export default function AnimePage() {
             className="px-4 py-2 rounded-lg bg-white cursor-pointer"
           >
             <option value="default" onClick={sortByDefault}>
-              Default
+              Relevant
             </option>
             <option value="rating" onClick={sortByRating}>
               Rating
