@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import AnimeCard from "../components/AnimeCard";
 import Loading from "../components/Loading";
-import useAnime from "../hooks/useAnime";
+import useAnime from "../queries/useAnime";
 import Anime from "../types/Anime";
 
 export default function AnimePage() {

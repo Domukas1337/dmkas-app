@@ -9,7 +9,7 @@ export default function useAnimeDetails({
   random?: boolean;
 }) {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["animeDetails"],
+    queryKey: ["animeDetails", id],
     queryFn: () => getAnimeDetails({ id, random }),
   });
 

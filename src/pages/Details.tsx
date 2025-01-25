@@ -9,8 +9,8 @@ import AnimeReviews from "../types/AnimeReviews";
 import AnimeDetails from "../components/AnimeDetails";
 import Loading from "../components/Loading";
 import Review from "../components/Review";
-import useReviews from "../hooks/useReviews";
-import useAnimeDetails from "../hooks/useAnimeDetails";
+import useReviews from "../queries/useReviews";
+import useAnimeDetails from "../queries/useAnimeDetails";
 
 export default function Details({ random = false }: { random?: boolean }) {
   const [page, setPage] = useState(1);
