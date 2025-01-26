@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MiniAnimeCard from "../components/MiniAnimeCard";
 import useSearch from "../queries/useSearch";
 import MiniAnime from "../types/MiniAnime";
@@ -7,10 +7,14 @@ import MiniLoading from "../components/MiniLoading";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
+  const [hidden, setHidden] = useState(false);
   const [searchResults, setSearchResults] = useState<MiniAnime[]>([]);
   const { data, isLoading, error } = useSearch(searchValue);
 
+  const navigate = useNavigate();
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHidden(false);
     setSearchValue(event.target.value);
   };
 
@@ -23,7 +27,11 @@ export default function Search() {
   }, [searchValue, data]);
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onClick={() => setHidden(false)}
+      onMouseEnter={() => setHidden(false)}
+    >
       <div
         className={`flex flex-row justify-center items-center border-2 hover:border-red-500 ${
           searchValue ? "bg-red-300 dark:bg-red-700 border-red-700" : "bg-black"
@@ -37,7 +45,7 @@ export default function Search() {
           onChange={handleInputChange}
           onKeyDown={(event) => {
             if (event.key === "Enter" && searchValue) {
-              window.location.href = `/anime?q=${searchValue}`;
+              navigate(`/anime?q=${searchValue}`);
             }
           }}
         />
@@ -70,7 +78,10 @@ export default function Search() {
           {isLoading && !error ? (
             <MiniLoading />
           ) : (
-            <div className="flex flex-col">
+            <div
+              className={`flex flex-col ${hidden ? "hidden" : "block"}`}
+              onMouseLeave={() => setHidden(true)}
+            >
               {searchResults.slice(0, 4).map((result) => (
                 <MiniAnimeCard key={result.mal_id} {...result} />
               ))}
