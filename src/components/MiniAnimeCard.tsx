@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import MiniAnime from "../types/MiniAnime";
+import { FaStar } from "react-icons/fa";
 
 export default function MiniAnimeCard({
   title,
@@ -24,12 +25,17 @@ export default function MiniAnimeCard({
         {title.length > 20 ? title.slice(0, 20) + "..." : title}
       </p>
       <div className="flex flex-row pl-2 gap-2">
-        <p className="dark:bg-white px-2 text-xs font-semibold rounded-full dark:text-black">
-          {score}
-        </p>
-        <p className="dark:bg-white px-2 text-xs font-semibold rounded-full dark:text-black">
-          {rank}
-        </p>
+        <div className="flex flex-row items-center dark:bg-white rounded-full px-1.5">
+          <p className="px-0.5 text-xs font-semibold dark:text-black">
+            {score}
+          </p>
+          <FaStar className="text-yellow-400 text-base" />
+        </div>
+        <div className="flex flex-row items-center">
+          <p className="dark:bg-white px-2 text-xs font-semibold rounded-full dark:text-black">
+            {rank}#
+          </p>
+        </div>
       </div>
     </Link>
   );

@@ -14,7 +14,7 @@ export default function Navbar() {
         <Search />
       </div>
       <div className="hidden sm:block px-2 rounded-md mr-4 text-gray-500 dark:text-white sm:text-base text-sm">
-        v1.3a
+        v1.0
       </div>
     </nav>
   );

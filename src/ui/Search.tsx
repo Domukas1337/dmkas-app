@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MiniAnimeCard from "../components/MiniAnimeCard";
 import useSearch from "../queries/useSearch";
-import Loading from "../components/Loading";
 import MiniAnime from "../types/MiniAnime";
+import MiniLoading from "../components/MiniLoading";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
@@ -68,7 +68,7 @@ export default function Search() {
       {searchValue && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 shadow-lg rounded-md overflow-hidden z-50">
           {isLoading && !error ? (
-            <Loading />
+            <MiniLoading />
           ) : (
             <div className="flex flex-col">
               {searchResults.slice(0, 4).map((result) => (
