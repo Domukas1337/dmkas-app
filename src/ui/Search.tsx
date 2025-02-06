@@ -46,6 +46,7 @@ export default function Search() {
           onKeyDown={(event) => {
             if (event.key === "Enter" && searchValue) {
               navigate(`/anime?q=${searchValue}`);
+              setHidden(true);
             }
           }}
         />
