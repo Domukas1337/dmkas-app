@@ -75,7 +75,7 @@ export default function Search() {
         </Link>
       </div>
       {searchValue && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 shadow-lg rounded-md overflow-hidden z-50">
+        <div className="absolute top-full rounded-xl my-0.5 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg overflow-hidden z-50">
           {isLoading && !error ? (
             <MiniLoading />
           ) : (
