@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 export default function useAnime(query: string) {
   const { isLoading, error, data } = useQuery({
     queryKey: ["anime", query],
-    queryFn: () => getAnime(query),
+    queryFn: query.length > 3 ? () => getAnime(query) : undefined,
     enabled: !!query,
   });
 

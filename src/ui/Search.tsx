@@ -74,7 +74,7 @@ export default function Search() {
           </svg>
         </Link>
       </div>
-      {searchValue && (
+      {searchValue.length > 3 && (
         <div className="absolute top-full rounded-xl my-0.5 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg overflow-hidden z-50">
           {isLoading && !error ? (
             <MiniLoading />
