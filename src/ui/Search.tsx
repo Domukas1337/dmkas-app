@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MiniAnimeCard from "../components/MiniAnimeCard";
 import useSearch from "../queries/useSearch";
 import MiniAnime from "../types/MiniAnime";
@@ -10,8 +10,6 @@ export default function Search() {
   const [hidden, setHidden] = useState(false);
   const [searchResults, setSearchResults] = useState<MiniAnime[]>([]);
   const { data, isLoading, error } = useSearch(searchValue);
-
-  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setHidden(false);
@@ -45,7 +43,7 @@ export default function Search() {
           onChange={handleInputChange}
           onKeyDown={(event) => {
             if (event.key === "Enter" && searchValue) {
-              navigate(`/anime?q=${searchValue}`);
+              window.location.href = `/anime?q=${searchValue}`;
               setHidden(true);
             }
           }}
