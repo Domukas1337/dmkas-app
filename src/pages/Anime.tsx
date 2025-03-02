@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import AnimeCard from "../components/AnimeCard";
-import Loading from "../components/Loading";
+import Loading from "../ui/Loading";
 import useAnime from "../queries/useAnime";
 import Anime from "../types/Anime";
 

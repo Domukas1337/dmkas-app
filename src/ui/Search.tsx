@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MiniAnimeCard from "../components/MiniAnimeCard";
 import useSearch from "../queries/useSearch";
 import MiniAnime from "../types/MiniAnime";
-import MiniLoading from "../components/MiniLoading";
+import MiniLoading from "./MiniLoading";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");

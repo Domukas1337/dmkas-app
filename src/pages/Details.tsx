@@ -7,7 +7,7 @@ import Anime from "../types/Anime";
 import AnimeReviews from "../types/AnimeReviews";
 
 import AnimeDetails from "../components/AnimeDetails";
-import Loading from "../components/Loading";
+import Loading from "../ui/Loading";
 import Review from "../components/Review";
 import useReviews from "../queries/useReviews";
 import useAnimeDetails from "../queries/useAnimeDetails";
