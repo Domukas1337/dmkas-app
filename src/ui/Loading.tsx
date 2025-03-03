@@ -19,11 +19,6 @@ export default function Loading() {
           />
         </svg>
       </div>
-      <div className="mt-4">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold dark:text-white">
-          Loading...
-        </h1>
-      </div>
     </div>
   );
 }
