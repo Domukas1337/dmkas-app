@@ -22,6 +22,37 @@ export default function Details({ random = false }: { random?: boolean }) {
 
   const id = searchParams.get("id");
 
+  const {
+    isLoading: isLoadingDetails,
+    error: errorDetails,
+    data,
+  } = useAnimeDetails({
+    id: Number(id),
+    random,
+  });
+
+  useEffect(() => {
+    if (!isLoadingDetails) {
+      setAnimeDetails(data!);
+    }
+  }, [data, isLoadingDetails]);
+
+  const {
+    isLoading: isLoadingReviews,
+    error: errorReviews,
+    reviews: fetchedReviews,
+    hasNextPage,
+  } = useReviews({
+    id: Number(id),
+    page,
+  });
+
+  useEffect(() => {
+    if (!isLoadingReviews) {
+      setReviews(fetchedReviews!);
+    }
+  }, [isLoadingReviews, fetchedReviews]);
+
   if (!random && !id) {
     return (
       <div className="flex flex-col justify-center items-center">
@@ -41,21 +72,6 @@ export default function Details({ random = false }: { random?: boolean }) {
     );
   }
 
-  const {
-    isLoading: isLoadingDetails,
-    error: errorDetails,
-    data,
-  } = useAnimeDetails({
-    id: Number(id),
-    random,
-  });
-
-  useEffect(() => {
-    if (!isLoadingDetails) {
-      setAnimeDetails(data!);
-    }
-  }, [data, isLoadingDetails]);
-
   if (errorDetails) {
     return (
       <div>
@@ -69,22 +85,6 @@ export default function Details({ random = false }: { random?: boolean }) {
     );
   }
 
-  const {
-    isLoading: isLoadingReviews,
-    error: errorReviews,
-    reviews: fetchedReviews,
-    hasNextPage,
-  } = useReviews({
-    id: Number(id),
-    page,
-  });
-
-  useEffect(() => {
-    if (!isLoadingReviews) {
-      setReviews(fetchedReviews!);
-    }
-  }, [isLoadingReviews, fetchedReviews]);
-
   return (
     <div className="m-2 sm:m-4 md:m-6">
       {isLoadingDetails ? (
@@ -92,7 +92,7 @@ export default function Details({ random = false }: { random?: boolean }) {
       ) : (
         animeDetails &&
         animeDetails.data && (
-          <div className="pop-up border border-gray-400 rounded-lg fadein">
+          <div className="pop-up border border-gray-400 rounded-lg fadein backdrop-blur-3xl mt-16">
             <AnimeDetails
               anime={{
                 status: animeDetails.data.status,

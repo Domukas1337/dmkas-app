@@ -40,7 +40,7 @@ export default function AnimePage() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center mt-20">
       <div
         className={`flex flex-row justify-between items-center w-screen px-10 gap-10 mt-4 ${
           isLoading ? "hidden" : "fadein"
