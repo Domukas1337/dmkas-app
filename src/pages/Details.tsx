@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 // import toast from "react-hot-toast";
 
+import { IoMdRefreshCircle } from "react-icons/io";
+
 import Anime from "../types/Anime";
 import AnimeReviews from "../types/AnimeReviews";
 
@@ -92,7 +94,17 @@ export default function Details({ random = false }: { random?: boolean }) {
       ) : (
         animeDetails &&
         animeDetails.data && (
-          <div className="pop-up border border-gray-400 rounded-lg fadein backdrop-blur-3xl mt-16">
+          <div className="flex justify-center items-center flex-col pop-up border border-gray-400 rounded-lg fadein backdrop-blur-3xl mt-16">
+            {random && (
+              <button
+                onClick={() => {
+                  window.location.reload();
+                }}
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md mt-4 transition-colors duration-200"
+              >
+                <IoMdRefreshCircle />
+              </button>
+            )}
             <AnimeDetails
               anime={{
                 status: animeDetails.data.status,
