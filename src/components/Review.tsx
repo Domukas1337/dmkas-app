@@ -22,7 +22,7 @@ export default function Review({ review }: { review: AnimeReviews }) {
     <div className="text-white px-4 py-2 mt-4">
       <Link
         to={review.user.url}
-        className="flex flex-row items-center w-fit hover:bg-red-50 rounded-md px-2 py-2 transition-all"
+        className="flex flex-row items-center w-fit hover:bg-red-500/50 rounded-md px-2 py-2 transition-all"
       >
         <img
           src={review.user.images.jpg.image_url}
