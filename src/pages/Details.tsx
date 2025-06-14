@@ -121,7 +121,7 @@ export default function Details({ random = false }: { random?: boolean }) {
                 trailer: animeDetails.data.trailer,
               }}
             />
-            <div className="flex flex-col p-2 mt-10">
+            <div className="flex flex-col p-2 mt-24">
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white text-center">
                 Reviews
               </h1>
